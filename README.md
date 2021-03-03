@@ -1,5 +1,7 @@
 # MonitiHealthy
+
 ---
+
 ## Screenshot
-![Mockup image.](/Mockups/MockupiMenuAPI.png)
----
+
+## ![Mockup image.](/Mockups/MockupiMenuAPI.png)
