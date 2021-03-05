@@ -1,5 +1,5 @@
 //Load hero image.
-import heroBackground from "../img/hero-background.jpg";
+import heroBackground from "../img/HeroBackground.jpg";
 const HeroComponent = () => {
   return (
     <div
@@ -20,8 +20,8 @@ const HeroComponent = () => {
       <h1
         style={{
           fontSize: "4.5em",
-          marginTop: "0",
-          marginBottom: "0.5em",
+          marginTop: "100px",
+          marginBottom: "0px",
         }}
       >
         YOUR HEALTH IS IN YOUR HANDS
