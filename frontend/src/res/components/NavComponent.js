@@ -26,8 +26,12 @@ const NavComponent = () => {
           </Nav>
         </Navbar.Collapse>
         <Button
-          style={{ marginLeft: "5px", marginRight: "5px" }}
-          className="justify-content-end"
+          style={{
+            marginLeft: "5px",
+            marginRight: "5px",
+            border: "2px solid #0d6efd",
+          }}
+          className="justify-content-end shadow-sm rounded"
           variant="primary"
         >
           LOGIN
@@ -40,8 +44,8 @@ const NavComponent = () => {
             color: "#0d6efd",
             border: "2px solid #0d6efd",
           }}
-          className="justify-content-end"
-          variant="dark"
+          className="justify-content-end shadow-sm rounded"
+          variant="primary"
         >
           SIGNUP
         </Button>
