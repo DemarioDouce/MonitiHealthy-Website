@@ -1,5 +1,8 @@
+//Load component
+import ButtonComponent from "../components/ButtonComponent";
 //Load hero image.
 import heroBackground from "../img/HeroBackground.jpg";
+
 const HeroComponent = () => {
   return (
     <div
@@ -17,15 +20,35 @@ const HeroComponent = () => {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <h1
-        style={{
-          fontSize: "4.5em",
-          marginTop: "100px",
-          marginBottom: "0px",
-        }}
-      >
-        YOUR HEALTH IS IN YOUR HANDS
-      </h1>
+      <div>
+        <h1
+          style={{
+            fontSize: "4.5em",
+            marginTop: "100px",
+            marginBottom: "0px",
+          }}
+        >
+          YOUR HEALTH IS IN YOUR HANDS
+        </h1>
+        {/* Login In */}
+        <ButtonComponent
+          title="LOGIN"
+          colorBackground="#0d6efd"
+          textColor="#fff"
+          onClick={() => {
+            alert("Login in");
+          }}
+        />
+        {/* Sign up */}
+        <ButtonComponent
+          title="SIGN UP"
+          colorBackground="#fff"
+          textColor="#0d6efd"
+          onClick={() => {
+            alert("Sign Up");
+          }}
+        />
+      </div>
     </div>
   );
 };
