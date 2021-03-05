@@ -1,7 +1,13 @@
 //Load components
-import Nav from "./res/components/NavComponent";
+import NavComponent from "./res/components/NavComponent";
+import FooterComponent from "./res/components/FooterComponent";
 const App = () => {
-  return <Nav />;
+  return (
+    <>
+      <NavComponent />
+      <FooterComponent />
+    </>
+  );
 };
 
 export default App;
