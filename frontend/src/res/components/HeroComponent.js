@@ -1,35 +1,31 @@
-//Load npm module react-bootstrap.
-import { Card } from "react-bootstrap";
 //Load hero image.
 import heroBackground from "../img/hero-background.jpg";
 const HeroComponent = () => {
   return (
     <div
       style={{
-        backgroundImage: `url(${heroBackground})`,
-        minHeight: "100vh",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
+        width: "100vw",
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+        color: "white",
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url(${heroBackground})`,
         backgroundSize: "cover",
-        position: "relative",
+        backgroundPosition: "center center",
+        backgroundRepeat: "no-repeat",
       }}
     >
-      <Card
-        className="text-center"
+      <h1
         style={{
-          width: "21rem",
-          background: "#0d6efd",
-          color: "white",
-          paddingTop: "20px",
-          paddingBottom: "20px",
-          paddingLeft: "5px",
-          paddingRight: "5px",
-          right: "-50px",
-          bottom: "-90px",
+          fontSize: "4.5em",
+          marginTop: "0",
+          marginBottom: "0.5em",
         }}
       >
-        <Card.Title>YOUR HEALTH IS IN YOUR HANDS</Card.Title>
-      </Card>
+        YOUR HEALTH IS IN YOUR HANDS
+      </h1>
     </div>
   );
 };
