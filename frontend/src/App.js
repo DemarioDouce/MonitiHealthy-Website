@@ -1,9 +1,7 @@
+//Load components
+import Nav from "./res/components/NavComponent";
 const App = () => {
-  return (
-    <div className="container">
-      <h1 className="text-center">Hello World!</h1>
-    </div>
-  );
+  return <Nav />;
 };
 
 export default App;
