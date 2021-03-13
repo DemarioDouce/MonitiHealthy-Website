@@ -1,8 +1,12 @@
+//Load components
+import FooterComponent from "./res/components/FooterComponent";
+import HeroComponent from "./res/components/HeroComponent";
 const App = () => {
   return (
-    <div className="container">
-      <h1 className="text-center">Hello World!</h1>
-    </div>
+    <>
+      <HeroComponent />
+      <FooterComponent />
+    </>
   );
 };
 
