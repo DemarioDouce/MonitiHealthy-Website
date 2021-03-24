@@ -13,15 +13,11 @@ var PatientSchema = new Schema({
     // Validate the email format
     match: [/.+\@.+\..+/, "Please fill a valid email address"],
   },
-  username: {
-    type: String,
-    // Set a unique 'username' index
-    unique: true,
-    // Validate 'username' value existance
-    required: "Username is required",
-    // Trim the 'username' field
-    trim: true,
-  },
+  phoneNumber: { type: Number, required: true },
+
+  address: { type: String, required: true },
+
+  city: { type: String, required: true },
   password: {
     type: String,
     // Validate the 'password' value length
