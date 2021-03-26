@@ -1,8 +1,8 @@
-//Load components
+//Load FooterComponent component
 import FooterComponent from "./res/components/FooterComponent";
-//Load hero image.
+//Load hero heroBackground image
 import heroBackground from "./res/img/HeroBackground.jpg";
-//Load component
+//Load ButtonComponent component
 import ButtonComponent from "./res/components/ButtonComponent";
 
 const App = () => {
