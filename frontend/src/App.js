@@ -2,8 +2,8 @@
 import FooterComponent from "./res/components/FooterComponent";
 //Load hero heroBackground image
 import heroBackground from "./res/img/HeroBackground.jpg";
-//Load ButtonComponent component
-import ButtonComponent from "./res/components/ButtonComponent";
+//Load @material-ui/core package
+import { Button } from "@material-ui/core";
 
 const App = () => {
   return (
@@ -34,23 +34,43 @@ const App = () => {
             YOUR HEALTH IS IN YOUR HANDS
           </h1>
           {/* Login In */}
-          <ButtonComponent
-            title="LOGIN"
-            colorBackground="#0d6efd"
-            textColor="#fff"
-            onClick={() => {
-              alert("Login in");
+          <Button
+            style={{
+              border: "none",
+              color: "#fff",
+              padding: "10px 30px",
+              textAlign: "center",
+              textDecoration: "none",
+              display: "inline-block",
+              fontSize: "16px",
+              margin: "10px 10px",
+              cursor: "pointer",
+              backgroundColor: "#0d6efd",
+              border: "2px solid #0d6efd",
             }}
-          />
+            variant="contained"
+          >
+            LOGIN
+          </Button>
           {/* Sign up */}
-          <ButtonComponent
-            title="SIGN UP"
-            colorBackground="#fff"
-            textColor="#0d6efd"
-            onClick={() => {
-              alert("Sign Up");
+          <Button
+            style={{
+              border: "none",
+              color: "#0d6efd",
+              padding: "10px 30px",
+              textAlign: "center",
+              textDecoration: "none",
+              display: "inline-block",
+              fontSize: "16px",
+              margin: "10px 10px",
+              cursor: "pointer",
+              backgroundColor: "#fff",
+              border: "2px solid #0d6efd",
             }}
-          />
+            variant="contained"
+          >
+            SIGN UP
+          </Button>
         </div>
       </div>
       <FooterComponent />
