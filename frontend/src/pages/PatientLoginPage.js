@@ -1,7 +1,7 @@
 //Load components
 import FooterComponent from "../res/components/FooterComponent";
 
-const LoginComponent = () => {
+const PatientLoginPage = () => {
   return (
     <>
       <p>Hello World</p>
@@ -10,4 +10,4 @@ const LoginComponent = () => {
   );
 };
 
-export default LoginComponent;
+export default PatientLoginPage;
