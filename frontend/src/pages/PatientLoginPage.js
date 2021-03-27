@@ -16,6 +16,7 @@ import { Link as ReactLink } from "react-router-dom";
 import axios from "axios";
 import Copyright from "../res/components/Copyright";
 import Box from "@material-ui/core/Box";
+import Navigation from "../res/components/Navigation";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -71,6 +72,7 @@ const PatientLoginPage = () => {
 
   return (
     <React.Fragment>
+      <Navigation />
       {screen === "auth" ? (
         <div style={{ marginTop: "100px" }}>
           <Container component="main" maxWidth="xs">

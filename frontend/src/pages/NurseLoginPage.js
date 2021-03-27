@@ -1,5 +1,3 @@
-//Load components
-import FooterComponent from "../res/components/FooterComponent";
 //Load @material-ui/core package
 import { Button, Container, TextField } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -16,6 +14,7 @@ import { Link as ReactLink } from "react-router-dom";
 import axios from "axios";
 import Copyright from "../res/components/Copyright";
 import Box from "@material-ui/core/Box";
+import Navigation from "../res/components/Navigation";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -71,6 +70,7 @@ const NurseLoginPage = () => {
 
   return (
     <React.Fragment>
+      <Navigation />
       {screen === "auth" ? (
         <div style={{ marginTop: "80px" }}>
           <Container component="main" maxWidth="xs">
