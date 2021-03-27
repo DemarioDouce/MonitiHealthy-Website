@@ -19,10 +19,9 @@ import Container from "@material-ui/core/Container";
 import { Link as ReactLink, withRouter } from "react-router-dom";
 import { green } from "@material-ui/core/colors";
 import axios from "axios";
-import NurseLoginPage from "./NurseLoginPage";
-import Paper from "@material-ui/core/Paper";
-import { Alert, AlertTitle } from "@material-ui/lab";
 import Copyright from "../res/components/Copyright";
+import Navigation from "../res/components/Navigation";
+import SignupSuccess from "../res/components/SignupSuccess";
 
 //Style
 const useStyles = makeStyles((theme) => ({
@@ -165,6 +164,7 @@ const NurseSignUpPage = () => {
 
   return (
     <React.Fragment>
+      <Navigation />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         {!status ? (
@@ -334,18 +334,7 @@ const NurseSignUpPage = () => {
             </Box>
           </div>
         ) : (
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <Paper elevation={5} className={classes.paper}>
-                <Alert severity="success">
-                  <AlertTitle>Success</AlertTitle>
-                  Your account has been created! —{" "}
-                  <strong>Please log in!</strong>
-                </Alert>
-                <NurseLoginPage />
-              </Paper>
-            </Grid>
-          </Grid>
+          <SignupSuccess path={"/nurse-login"} />
         )}
       </Container>
     </React.Fragment>

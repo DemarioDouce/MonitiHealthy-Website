@@ -23,6 +23,8 @@ import PatientLoginPage from "./PatientLoginPage";
 import Paper from "@material-ui/core/Paper";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import Copyright from "../res/components/Copyright";
+import Navigation from "../res/components/Navigation";
+import SignupSuccess from "../res/components/SignupSuccess";
 
 //Style
 const useStyles = makeStyles((theme) => ({
@@ -165,6 +167,7 @@ const PatientSignUpPage = () => {
 
   return (
     <React.Fragment>
+      <Navigation />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         {!status ? (
@@ -338,18 +341,7 @@ const PatientSignUpPage = () => {
             </Box>
           </div>
         ) : (
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <Paper elevation={5} className={classes.paper}>
-                <Alert severity="success">
-                  <AlertTitle>Success</AlertTitle>
-                  Your account has been created! —{" "}
-                  <strong>Please log in!</strong>
-                </Alert>
-                <PatientLoginPage />
-              </Paper>
-            </Grid>
-          </Grid>
+          <SignupSuccess path={"/patient-login"} />
         )}
       </Container>
     </React.Fragment>
