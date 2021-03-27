@@ -15,9 +15,9 @@ function getErrorMessage(err) {
   }
 }
 //
-exports.create = function (req, res) {
+exports.create = function (req, res, next) {
   const nurse = new Nurse(req.body);
-  console.log("body: " + req.body.firstName);
+  console.log("body: " + req.body.employeeNumber);
 
   // Use the 'Nurse' instance's 'save' method to save a new nurse document
   nurse.save(function (err) {

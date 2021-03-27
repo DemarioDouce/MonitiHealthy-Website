@@ -100,7 +100,7 @@ const NurseSignUpPage = () => {
     const data = {
       firstName: nurse.firstName,
       lastName: nurse.lastName,
-      email: nurse.email,
+      employeeNumber: nurse.employeeNumber,
       password: nurse.password,
       address: nurse.address,
       city: nurse.city,
@@ -136,7 +136,7 @@ const NurseSignUpPage = () => {
         const data = {
           firstName: nurse.firstName,
           lastName: nurse.lastName,
-          email: nurse.email,
+          employeeNumber: nurse.employeeNumber,
           password: nurse.password,
           address: nurse.address,
           city: nurse.city,
