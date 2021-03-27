@@ -92,13 +92,11 @@ const PatientSignUpPage = () => {
   });
   const [showLoading, setShowLoading] = useState(false);
   const [status, setStatus] = React.useState(false);
-  //setStatus(false);
   const onChange = (e) => {
     e.persist();
     setPatient({ ...patient, [e.target.name]: e.target.value });
   };
   const savePatient = (e) => {
-    //setShowLoading(true);
     e.preventDefault();
     const data = {
       firstName: patient.firstName,
@@ -149,13 +147,8 @@ const PatientSignUpPage = () => {
           phoneNumber: patient.phoneNumber,
         };
         axios.post(apiUrl, data).then((result) => {
-          //setShowLoading(false);
-          //props.history.push('/show/' + result.data._id)
-          //<SignIn status={true} />
           setStatus(true);
-          //props.history.push('/signin')
         });
-        //<SignIn status={true} />
         setSuccess(true);
         setLoading(false);
       }, 2000);
