@@ -4,6 +4,8 @@ import FooterComponent from "./res/components/FooterComponent";
 import heroBackground from "./res/img/HeroBackground.jpg";
 //Load @material-ui/core package
 import { Button } from "@material-ui/core";
+//Load react-router-dom package
+import { Link } from "react-router-dom";
 
 const App = () => {
   return (
@@ -34,36 +36,28 @@ const App = () => {
             YOUR HEALTH IS IN YOUR HANDS
           </h1>
           {/* Login In */}
-          <Button
-            style={{
-              border: "none",
-              color: "#fff",
-              padding: "10px 30px",
-              textAlign: "center",
-              textDecoration: "none",
-              display: "inline-block",
-              fontSize: "16px",
-              margin: "10px 10px",
-              cursor: "pointer",
-              backgroundColor: "#0d6efd",
-              border: "2px solid #0d6efd",
-            }}
-            variant="contained"
-          >
-            LOGIN
-          </Button>
+          <Link to="/patient-login">
+            <Button
+              style={{
+                color: "#fff",
+                padding: "10px 30px",
+                fontSize: "16px",
+                margin: "10px 10px",
+                backgroundColor: "#0d6efd",
+                border: "2px solid #0d6efd",
+              }}
+              variant="contained"
+            >
+              LOGIN
+            </Button>
+          </Link>
           {/* Sign up */}
           <Button
             style={{
-              border: "none",
               color: "#0d6efd",
               padding: "10px 30px",
-              textAlign: "center",
-              textDecoration: "none",
-              display: "inline-block",
               fontSize: "16px",
               margin: "10px 10px",
-              cursor: "pointer",
               backgroundColor: "#fff",
               border: "2px solid #0d6efd",
             }}

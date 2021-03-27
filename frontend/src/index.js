@@ -7,11 +7,13 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./res/css/index.css";
 //Pages
 import App from "./App";
+import PatientLoginPage from "./pages/PatientLoginPage";
 
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
       <Route path="/" component={App} exact />
+      <Route path="/patient-login" component={PatientLoginPage} exact />
     </Switch>
   </BrowserRouter>,
   document.getElementById("root")
