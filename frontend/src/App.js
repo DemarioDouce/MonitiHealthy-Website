@@ -36,11 +36,12 @@ const App = () => {
             YOUR HEALTH IS IN YOUR HANDS
           </h1>
           {/* Login In */}
-          <Link to="/patient-login">
+          <Link to="/patient-login" style={{ textDecoration: "none" }}>
             <Button
               style={{
                 color: "#fff",
                 padding: "10px 30px",
+
                 fontSize: "16px",
                 margin: "10px 10px",
                 backgroundColor: "#0d6efd",
@@ -52,19 +53,21 @@ const App = () => {
             </Button>
           </Link>
           {/* Sign up */}
-          <Button
-            style={{
-              color: "#0d6efd",
-              padding: "10px 30px",
-              fontSize: "16px",
-              margin: "10px 10px",
-              backgroundColor: "#fff",
-              border: "2px solid #0d6efd",
-            }}
-            variant="contained"
-          >
-            SIGN UP
-          </Button>
+          <Link to="/patient-signup" style={{ textDecoration: "none" }}>
+            <Button
+              style={{
+                color: "#0d6efd",
+                padding: "10px 30px",
+                fontSize: "16px",
+                margin: "10px 10px",
+                backgroundColor: "#fff",
+                border: "2px solid #0d6efd",
+              }}
+              variant="contained"
+            >
+              SIGN UP
+            </Button>
+          </Link>
         </div>
       </div>
       <FooterComponent />
