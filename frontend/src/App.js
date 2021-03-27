@@ -70,7 +70,7 @@ const App = () => {
           </Link>
         </div>
       </div>
-      <FooterComponent />
+      <FooterComponent color="white" />
     </>
   );
 };

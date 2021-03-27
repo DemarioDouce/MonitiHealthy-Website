@@ -2,7 +2,7 @@
 let currentYear = () => {
   return new Date().getFullYear();
 };
-const FooterComponent = (color) => {
+const FooterComponent = ({ color }) => {
   return (
     <footer
       className="text-center lg"
@@ -13,7 +13,7 @@ const FooterComponent = (color) => {
         bottom: "0",
         width: "100%",
         background: "transparent",
-        color: { color },
+        color: color,
         padding: "8px 0px",
       }}
     >
