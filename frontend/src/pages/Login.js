@@ -6,7 +6,7 @@ const Login = () => {
     <MainDisplayComponent
       path1={"/nurse-login"}
       button1Text={"Nurse Login"}
-      path2={"/patien-login"}
+      path2={"/patient-login"}
       button2Text={"Patient Login"}
     />
   );
