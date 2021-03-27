@@ -34,7 +34,7 @@ function Navigation() {
 
   return (
     <AppBar
-      position="static"
+      position="absolute"
       color="default"
       elevation={0}
       className={classes.appBar}
