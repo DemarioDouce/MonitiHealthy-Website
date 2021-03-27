@@ -61,7 +61,7 @@ const PatientLoginPage = () => {
                 LOGIN
               </Button>
             </form>
-            <FooterComponent />
+            <FooterComponent color="black" />
           </div>
         </div>
       </Container>

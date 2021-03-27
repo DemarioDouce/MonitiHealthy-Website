@@ -22,7 +22,7 @@ const NurseSignUpPage = () => {
           >
             <h1>SIGN UP</h1>
             <h1>Hello world!</h1>
-            <FooterComponent />
+            <FooterComponent color="black" />
           </div>
         </div>
       </Container>
