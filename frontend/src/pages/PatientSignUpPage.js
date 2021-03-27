@@ -1,5 +1,4 @@
 //Load components
-import FooterComponent from "../res/components/FooterComponent";
 import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -334,6 +333,9 @@ const PatientSignUpPage = () => {
                 </Grid>
               </Grid>
             </form>
+            <Box mt={5}>
+              <Copyright />
+            </Box>
           </div>
         ) : (
           <Grid container spacing={3}>
@@ -349,10 +351,6 @@ const PatientSignUpPage = () => {
             </Grid>
           </Grid>
         )}
-
-        <Box mt={5}>
-          <Copyright />
-        </Box>
       </Container>
     </React.Fragment>
   );

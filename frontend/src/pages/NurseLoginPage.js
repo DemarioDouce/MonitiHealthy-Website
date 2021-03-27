@@ -72,7 +72,7 @@ const NurseLoginPage = () => {
   return (
     <React.Fragment>
       {screen === "auth" ? (
-        <div style={{ marginTop: "100px" }}>
+        <div style={{ marginTop: "80px" }}>
           <Container component="main" maxWidth="xs">
             <CssBaseline />
             <React.Fragment>

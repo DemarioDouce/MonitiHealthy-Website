@@ -329,6 +329,9 @@ const NurseSignUpPage = () => {
                 </Grid>
               </Grid>
             </form>
+            <Box mt={5}>
+              <Copyright />
+            </Box>
           </div>
         ) : (
           <Grid container spacing={3}>
@@ -344,10 +347,6 @@ const NurseSignUpPage = () => {
             </Grid>
           </Grid>
         )}
-
-        <Box mt={5}>
-          <Copyright />
-        </Box>
       </Container>
     </React.Fragment>
   );
