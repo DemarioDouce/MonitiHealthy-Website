@@ -14,6 +14,8 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link as ReactLink } from "react-router-dom";
 import axios from "axios";
+import Copyright from "../res/components/Copyright";
+import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -133,6 +135,9 @@ const PatientLoginPage = () => {
               </form>
             </div>
           </React.Fragment>
+          <Box mt={5}>
+            <Copyright />
+          </Box>
         </Container>
       ) : (
         {

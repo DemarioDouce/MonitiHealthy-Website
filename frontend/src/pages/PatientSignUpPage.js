@@ -107,10 +107,7 @@ const PatientSignUpPage = () => {
       city: patient.city,
       phoneNumber: patient.phoneNumber,
     };
-    axios.post(apiUrl, data).then((result) => {
-      //setShowLoading(false);
-      //props.history.push('/show/' + result.data._id)
-    });
+    axios.post(apiUrl, data).then((result) => {});
     setPatient({
       _id: "",
       firstName: "",
@@ -177,7 +174,7 @@ const PatientSignUpPage = () => {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign up
+              Patient Sign up
             </Typography>
             <form onSubmit={savePatient} className={classes.form} noValidate>
               <Grid container spacing={2}>
