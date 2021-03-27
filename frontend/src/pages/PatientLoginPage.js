@@ -72,73 +72,75 @@ const PatientLoginPage = () => {
   return (
     <React.Fragment>
       {screen === "auth" ? (
-        <Container component="main" maxWidth="xs">
-          <CssBaseline />
-          <React.Fragment>
-            <div className={classes.paper}>
-              <Avatar className={classes.avatar}>
-                <LockOutlinedIcon />
-              </Avatar>
-              <Typography component="h1" variant="h5">
-                Patient Sign in
-              </Typography>
-              <form className={classes.form} noValidate>
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required="true"
-                  fullWidth
-                  id="email"
-                  label="Email"
-                  name="email"
-                  onChange={(e) => setEmail(e.target.value)}
-                  autoComplete="email"
-                  autoFocus
-                />
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="password"
-                  onChange={(e) => setPassword(e.target.value)}
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                />
-                <FormControlLabel
-                  fullWidth
-                  control={<Checkbox value="remember" color="primary" />}
-                  label="Remember me"
-                />
-                <Button
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  onClick={auth}
-                  className={classes.submit}
-                >
-                  Sign In
-                </Button>
-                <Grid container>
-                  <Grid item>
-                    <Link
-                      component={ReactLink}
-                      to="/patient-signup"
-                      variant="body2"
-                    >
-                      {"Don't have an account? Sign Up"}
-                    </Link>
+        <div style={{ marginTop: "100px" }}>
+          <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <React.Fragment>
+              <div className={classes.paper}>
+                <Avatar className={classes.avatar}>
+                  <LockOutlinedIcon />
+                </Avatar>
+                <Typography component="h1" variant="h5">
+                  Patient Sign in
+                </Typography>
+                <form className={classes.form} noValidate>
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required="true"
+                    fullWidth
+                    id="email"
+                    label="Email"
+                    name="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                    autoComplete="email"
+                    autoFocus
+                  />
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                  />
+                  <FormControlLabel
+                    fullWidth
+                    control={<Checkbox value="remember" color="primary" />}
+                    label="Remember me"
+                  />
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    onClick={auth}
+                    className={classes.submit}
+                  >
+                    Sign In
+                  </Button>
+                  <Grid container>
+                    <Grid item>
+                      <Link
+                        component={ReactLink}
+                        to="/patient-signup"
+                        variant="body2"
+                      >
+                        {"Don't have an account? Sign Up"}
+                      </Link>
+                    </Grid>
                   </Grid>
-                </Grid>
-              </form>
-            </div>
-          </React.Fragment>
-          <Box mt={5}>
-            <Copyright />
-          </Box>
-        </Container>
+                </form>
+              </div>
+            </React.Fragment>
+            <Box mt={5}>
+              <Copyright />
+            </Box>
+          </Container>
+        </div>
       ) : (
         {
           /*ADD PATIENT HOME PAGE HERE*/
