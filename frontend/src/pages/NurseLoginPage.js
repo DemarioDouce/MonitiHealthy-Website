@@ -42,6 +42,7 @@ const PatientLoginPage = () => {
                   id="username"
                   placeholder="Username"
                   type="text"
+                  required
                 />
               </Form.Group>
               <Form.Group>
@@ -59,6 +60,7 @@ const PatientLoginPage = () => {
                   id="password"
                   placeholder="Password"
                   type="password"
+                  required
                 />
               </Form.Group>
               <Button

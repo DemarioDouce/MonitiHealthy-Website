@@ -44,6 +44,7 @@ const NurseSignUpPage = () => {
                       id="firstName"
                       placeholder="First name"
                       type="text"
+                      required
                     />
                   </Form.Group>
                 </Col>
@@ -63,6 +64,7 @@ const NurseSignUpPage = () => {
                       id="lastName"
                       placeholder="Last name"
                       type="text"
+                      required
                     />
                   </Form.Group>
                 </Col>
@@ -84,6 +86,7 @@ const NurseSignUpPage = () => {
                       id="username"
                       placeholder="Username"
                       type="text"
+                      required
                     />
                   </Form.Group>
                 </Col>
@@ -103,6 +106,7 @@ const NurseSignUpPage = () => {
                       id="password"
                       placeholder="Password"
                       type="password"
+                      required
                     />
                   </Form.Group>
                 </Col>
@@ -117,6 +121,7 @@ const NurseSignUpPage = () => {
                   border: "2px solid #0d6efd",
                 }}
                 variant="contained"
+                type="submit"
               >
                 SIGNUP
               </Button>
@@ -132,7 +137,6 @@ const NurseSignUpPage = () => {
                     border: "2px solid #0d6efd",
                   }}
                   variant="contained"
-                  type="submit"
                 >
                   CANCEL
                 </Button>
