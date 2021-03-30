@@ -9,24 +9,20 @@ import "./res/css/index.css";
 import App from "./App";
 import PatientLoginPage from "./pages/PatientLoginPage";
 import NurseLoginPage from "./pages/NurseLoginPage";
-import PatientSignUpPage from "./pages/PatientSignUpPage";
-import NurseSignUpPage from "./pages/NurseSignUpPage";
-import SignUp from "./pages/SignUp";
-import Login from "./pages/Login";
+//import PatientSignUpPage from "./pages/PatientSignUpPage";
+//import NurseSignUpPage from "./pages/NurseSignUpPage";
 
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
       {/* Main */}
       <Route path="/" component={App} exact />
-      <Route path="/signup" component={SignUp} exact />
-      <Route path="/login" component={Login} exact />
       {/* Login */}
       <Route path="/patient-login" component={PatientLoginPage} exact />
       <Route path="/nurse-login" component={NurseLoginPage} exact />
-      {/* Sign up */}
+      {/* Sign up 
       <Route path="/patient-signup" component={PatientSignUpPage} exact />
-      <Route path="/nurse-signup" component={NurseSignUpPage} exact />
+      <Route path="/nurse-signup" component={NurseSignUpPage} exact />*/}
     </Switch>
   </BrowserRouter>,
   document.getElementById("root")
