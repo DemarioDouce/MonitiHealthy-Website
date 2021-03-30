@@ -53,7 +53,7 @@ const App = () => {
             </Button>
           </Link>
           {/* Sign up */}
-          <Link to="/" style={{ textDecoration: "none" }}>
+          <Link to="/patient-signup" style={{ textDecoration: "none" }}>
             <Button
               style={{
                 color: "#0d6efd",
