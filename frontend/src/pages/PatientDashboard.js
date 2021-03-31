@@ -10,9 +10,11 @@ import {
   BottomNavigationAction,
 } from "@material-ui/core";
 //Load material-ui/icons package
-import RestoreIcon from "@material-ui/icons/Restore";
+import InfoIcon from "@material-ui/icons/Info";
+import TimelineIcon from "@material-ui/icons/Timeline";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import LocationOnIcon from "@material-ui/icons/LocationOn";
+import NotificationImportantIcon from "@material-ui/icons/NotificationImportant";
+import HistoryIcon from "@material-ui/icons/History";
 //Load react-router-dom package
 import { Link } from "react-router-dom";
 
@@ -30,9 +32,28 @@ const PatientDashboard = () => {
             }}
             showLabels
           >
-            <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
-            <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-            <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+            <BottomNavigationAction
+              component={Link}
+              to="/patient-login"
+              label="ADD DAILY INFO"
+              icon={<InfoIcon />}
+            />
+            <BottomNavigationAction
+              label="DAILY INFO HISTORY"
+              icon={<TimelineIcon />}
+            />
+            <BottomNavigationAction
+              label="HEART DISEASE"
+              icon={<FavoriteIcon />}
+            />
+            <BottomNavigationAction
+              label="SEND ALERT"
+              icon={<NotificationImportantIcon />}
+            />
+            <BottomNavigationAction
+              label="EMERGENCY HISTORY"
+              icon={<HistoryIcon />}
+            />
           </BottomNavigation>
         </div>
         <div className="text-center">
