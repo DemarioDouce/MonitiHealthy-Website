@@ -14,6 +14,8 @@ import NurseSignUpPage from "./pages/NurseSignUpPage";
 import PatientDashboardPage from "./pages/PatientDashboardPage";
 import AddDailyInfoPage from "./pages/AddDailyInfoPage";
 import DailyInfoHistoryPage from "./pages/DailyInfoHistoryPage";
+import SendAlertPage from "./pages/SendAlertPage";
+import AlertHistoryPage from "./pages/AlertHistoryPage";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -36,6 +38,10 @@ ReactDOM.render(
         component={DailyInfoHistoryPage}
         exact
       />
+      {/* Send alert */}
+      <Route path="/send-alert" component={SendAlertPage} exact />
+      {/* alert history */}
+      <Route path="/alert-history" component={AlertHistoryPage} exact />
     </Switch>
   </BrowserRouter>,
   document.getElementById("root")
