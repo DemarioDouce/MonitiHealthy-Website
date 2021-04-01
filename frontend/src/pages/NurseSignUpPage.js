@@ -26,7 +26,7 @@ const NurseSignUpPage = () => {
             }}
           >
             <Form>
-              <h1>NURSE SIGNUP</h1>
+              <h1>Nurse Signup</h1>
               <Row>
                 <Col>
                   <Form.Group>

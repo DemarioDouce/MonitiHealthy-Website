@@ -31,7 +31,7 @@ const PatientLoginPage = (props) => {
             }}
           >
             <Form onSubmit={loginSubmit}>
-              <h1>LOGIN</h1>
+              <h1>Login</h1>
               <Form.Group>
                 <Form.Control
                   style={{

@@ -26,7 +26,7 @@ const PatientLoginPage = () => {
             }}
           >
             <Form>
-              <h1>NURSE LOGIN</h1>
+              <h1>Nurse Login</h1>
               <Form.Group>
                 <Form.Control
                   style={{
