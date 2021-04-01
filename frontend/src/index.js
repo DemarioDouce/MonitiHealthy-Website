@@ -13,6 +13,7 @@ import PatientSignUpPage from "./pages/PatientSignUpPage";
 import NurseSignUpPage from "./pages/NurseSignUpPage";
 import PatientDashboardPage from "./pages/PatientDashboardPage";
 import AddDailyInfoPage from "./pages/AddDailyInfoPage";
+import DailyInfoHistoryPage from "./pages/DailyInfoHistoryPage";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -29,6 +30,12 @@ ReactDOM.render(
       <Route path="/patient-dashboard" component={PatientDashboardPage} exact />
       {/* Add daily info */}
       <Route path="/add-daily-info" component={AddDailyInfoPage} exact />
+      {/* Daily info history */}
+      <Route
+        path="/daily-info-history"
+        component={DailyInfoHistoryPage}
+        exact
+      />
     </Switch>
   </BrowserRouter>,
   document.getElementById("root")

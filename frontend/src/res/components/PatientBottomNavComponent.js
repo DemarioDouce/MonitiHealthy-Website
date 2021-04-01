@@ -36,7 +36,12 @@ const PatientBottomNavComponent = ({ index }) => {
           label="ADD INFO"
           icon={<InfoIcon />}
         />
-        <BottomNavigationAction label="INFO HISTORY" icon={<TimelineIcon />} />
+        <BottomNavigationAction
+          component={Link}
+          to="/daily-info-history"
+          label="INFO HISTORY"
+          icon={<TimelineIcon />}
+        />
         <BottomNavigationAction label="HEART DISEASE" icon={<FavoriteIcon />} />
         <BottomNavigationAction
           label="SEND ALERT"
