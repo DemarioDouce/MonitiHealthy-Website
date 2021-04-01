@@ -11,7 +11,8 @@ import PatientLoginPage from "./pages/PatientLoginPage";
 import NurseLoginPage from "./pages/NurseLoginPage";
 import PatientSignUpPage from "./pages/PatientSignUpPage";
 import NurseSignUpPage from "./pages/NurseSignUpPage";
-import PatientDashboard from "./pages/PatientDashboard";
+import PatientDashboardPage from "./pages/PatientDashboardPage";
+import AddDailyInfoPage from "./pages/AddDailyInfoPage";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -25,7 +26,9 @@ ReactDOM.render(
       <Route path="/patient-signup" component={PatientSignUpPage} exact />
       <Route path="/nurse-signup" component={NurseSignUpPage} exact />
       {/* Dashboard */}
-      <Route path="/patient-dashboard" component={PatientDashboard} exact />
+      <Route path="/patient-dashboard" component={PatientDashboardPage} exact />
+      {/* Add daily info */}
+      <Route path="/add-daily-info" component={AddDailyInfoPage} exact />
     </Switch>
   </BrowserRouter>,
   document.getElementById("root")

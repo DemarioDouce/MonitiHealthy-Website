@@ -11,11 +11,11 @@ import CardComponent from "../res/components/CardComponent";
 import MeatBurgerImage from "../res/img/MeatBurgerImage.jpg";
 import WomenWorkingOutImage from "../res/img/WomenWorkingOutImage.jpg";
 
-const PatientDashboard = () => {
+const PatientDashboardPage = () => {
   return (
     <>
       <Container>
-        <PatientBottomNavComponent />
+        <PatientBottomNavComponent index={0} />
         <div className="text-center">
           <div
             style={{
@@ -55,4 +55,4 @@ const PatientDashboard = () => {
   );
 };
 
-export default PatientDashboard;
+export default PatientDashboardPage;

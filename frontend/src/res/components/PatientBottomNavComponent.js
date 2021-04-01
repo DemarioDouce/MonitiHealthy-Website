@@ -8,11 +8,12 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import NotificationImportantIcon from "@material-ui/icons/NotificationImportant";
 import HistoryIcon from "@material-ui/icons/History";
 import HomeIcon from "@material-ui/icons/Home";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 //Load react-router-dom package
 import { Link } from "react-router-dom";
 
-const PatientBottomNavComponent = () => {
-  const [value, setValue] = useState(0);
+const PatientBottomNavComponent = ({ index }) => {
+  const [value, setValue] = useState(index);
   return (
     <>
       <BottomNavigation
@@ -31,23 +32,18 @@ const PatientBottomNavComponent = () => {
         />
         <BottomNavigationAction
           component={Link}
-          to="/patient-login"
-          label="ADD DAILY INFO"
+          to="/add-daily-info"
+          label="ADD INFO"
           icon={<InfoIcon />}
         />
-        <BottomNavigationAction
-          label="DAILY INFO HISTORY"
-          icon={<TimelineIcon />}
-        />
+        <BottomNavigationAction label="INFO HISTORY" icon={<TimelineIcon />} />
         <BottomNavigationAction label="HEART DISEASE" icon={<FavoriteIcon />} />
         <BottomNavigationAction
           label="SEND ALERT"
           icon={<NotificationImportantIcon />}
         />
-        <BottomNavigationAction
-          label="EMERGENCY HISTORY"
-          icon={<HistoryIcon />}
-        />
+        <BottomNavigationAction label="ALERT HISTORY" icon={<HistoryIcon />} />
+        <BottomNavigationAction label="LOGOUT" icon={<ExitToAppIcon />} />
       </BottomNavigation>
     </>
   );
