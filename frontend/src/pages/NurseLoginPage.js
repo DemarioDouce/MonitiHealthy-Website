@@ -8,7 +8,12 @@ import { Button } from "@material-ui/core";
 //Load react-router-dom package
 import { Link } from "react-router-dom";
 
-const PatientLoginPage = () => {
+const NurseLoginPage = (props) => {
+  //Login nurse.
+  const loginSubmit = (e) => {
+    props.history.push("/nurse-dashboard");
+  };
+  //
   return (
     <>
       <Container>
@@ -25,7 +30,7 @@ const PatientLoginPage = () => {
               height: "50vh",
             }}
           >
-            <Form>
+            <Form onSubmit={loginSubmit}>
               <h1>Nurse Login</h1>
               <Form.Group>
                 <Form.Control
@@ -107,4 +112,4 @@ const PatientLoginPage = () => {
   );
 };
 
-export default PatientLoginPage;
+export default NurseLoginPage;

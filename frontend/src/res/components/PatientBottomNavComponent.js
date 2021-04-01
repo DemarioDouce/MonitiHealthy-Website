@@ -53,7 +53,12 @@ const PatientBottomNavComponent = ({ index }) => {
           label="ALERT HISTORY"
           icon={<HistoryIcon />}
         />
-        <BottomNavigationAction label="LOGOUT" icon={<ExitToAppIcon />} />
+        <BottomNavigationAction
+          component={Link}
+          to="/"
+          label="LOGOUT"
+          icon={<ExitToAppIcon />}
+        />
       </BottomNavigation>
     </>
   );

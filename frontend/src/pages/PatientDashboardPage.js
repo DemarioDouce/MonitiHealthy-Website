@@ -2,7 +2,7 @@ import React, { useState } from "react";
 //Component
 import FooterComponent from "../res/components/FooterComponent";
 //Load react-bootstrap package
-import { Container, Card, Row, Col } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 //Load bottom navigation component
 import PatientBottomNavComponent from "../res/components/PatientBottomNavComponent";
 //Load card component
