@@ -10,6 +10,8 @@ import CardComponent from "../res/components/CardComponent";
 //Load image
 import MeatBurgerImage from "../res/img/MeatBurgerImage.jpg";
 import WomenWorkingOutImage from "../res/img/WomenWorkingOutImage.jpg";
+//Load react-router-dom package
+import { Link } from "react-router-dom";
 
 const PatientDashboardPage = () => {
   return (
@@ -47,6 +49,9 @@ const PatientDashboardPage = () => {
                 />
               </Col>
             </Row>
+            <Link to="/health-tips" style={{ textDecoration: "none" }}>
+              <p style={{ margin: "20px" }}>View More</p>
+            </Link>
             <FooterComponent color="black" />
           </div>
         </div>

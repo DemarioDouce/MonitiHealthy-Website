@@ -18,7 +18,7 @@ import DailyInfoHistoryPage from "./pages/DailyInfoHistoryPage";
 import SendAlertPage from "./pages/SendAlertPage";
 import AlertHistoryPage from "./pages/AlertHistoryPage";
 import ViewAllPatientPage from "./pages/ViewAllPatientPage";
-
+import PatientHealthTipsPage from "./pages/PatientHealthTipsPage";
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
@@ -47,6 +47,8 @@ ReactDOM.render(
       <Route path="/alert-history" component={AlertHistoryPage} exact />
       {/* All all patient */}
       <Route path="/all-patient" component={ViewAllPatientPage} exact />
+      {/* Patient health tip page  */}
+      <Route path="/health-tips" component={PatientHealthTipsPage} exact />
     </Switch>
   </BrowserRouter>,
   document.getElementById("root")
