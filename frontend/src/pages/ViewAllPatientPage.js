@@ -1,4 +1,8 @@
 import { Container, ListGroup } from "react-bootstrap";
+//Load react-router-dom package
+import { Link } from "react-router-dom";
+//Component
+import FooterComponent from "../res/components/FooterComponent";
 
 function ViewAllPatientPage() {
   return (
@@ -45,6 +49,10 @@ function ViewAllPatientPage() {
                 Dapibus ac facilisis in
               </ListGroup.Item>
             </ListGroup>
+            <Link to="/nurse-dashboard" style={{ textDecoration: "none" }}>
+              <p style={{ margin: "20px" }}>Go Back</p>
+            </Link>
+            <FooterComponent color="black" />
           </div>
         </div>
       </Container>
