@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 //Component
 import FooterComponent from "../res/components/FooterComponent";
 //Load react-bootstrap package
@@ -6,12 +7,47 @@ import { Container, Form, Row, Col } from "react-bootstrap";
 //Load @material-ui/core package
 import { Button } from "@material-ui/core";
 //Load react-router-dom package
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import SignUpSuccess from "./SignUpSuccess";
 
 const PatientSignUpPage = (props) => {
-  //Signup patient.
+  const [patient, setPatient] = useState({
+    _id: "",
+    firstName: "",
+    lastName: "",
+    userName: "",
+    password: "",
+  });
+  const [registered, setRegistered] = useState(false);
+
+  const apiUrl = "http://localhost:3000/registerpatient";
+
+  //Signup nurse.
   const signupSubmit = (e) => {
-    props.history.push("/patient-dashboard");
+    e.preventDefault();
+    //this is the data of the nurse were saving
+    const data = {
+      firstName: patient.firstName,
+      lastName: patient.lastName,
+      userName: patient.userName,
+      password: patient.password,
+    };
+
+    //send post request to the backend using axios
+    axios
+      .post(apiUrl, data)
+      .then((result) => {
+        setRegistered(true);
+      })
+      .catch((error) => {
+        setRegistered(false);
+        console.log(error);
+      });
+  };
+
+  const onChange = (e) => {
+    e.persist();
+    setPatient({ ...patient, [e.target.name]: e.target.value });
   };
   //
   return (
@@ -30,129 +66,137 @@ const PatientSignUpPage = (props) => {
               height: "50vh",
             }}
           >
-            <Form onSubmit={signupSubmit}>
-              <h1>Signup</h1>
-              <Row>
-                <Col>
-                  <Form.Group>
-                    <Form.Control
-                      style={{
-                        width: "100%",
-                        padding: "12px 20px",
-                        margin: "8px 0",
-                        display: "inline-block",
-                        border: "1px solid #ccc",
-                        borderRadius: "4px",
-                        boxSizing: "border-box",
-                      }}
-                      name="firstName"
-                      id="firstName"
-                      placeholder="First name"
-                      type="text"
-                      required
-                    />
-                  </Form.Group>
-                </Col>
-                <Col>
-                  <Form.Group>
-                    <Form.Control
-                      style={{
-                        width: "100%",
-                        padding: "12px 20px",
-                        margin: "8px 0",
-                        display: "inline-block",
-                        border: "1px solid #ccc",
-                        borderRadius: "4px",
-                        boxSizing: "border-box",
-                      }}
-                      name="lastName"
-                      id="lastName"
-                      placeholder="Last name"
-                      type="text"
-                      required
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <Form.Group>
-                    <Form.Control
-                      style={{
-                        width: "100%",
-                        padding: "12px 20px",
-                        margin: "8px 0",
-                        display: "inline-block",
-                        border: "1px solid #ccc",
-                        borderRadius: "4px",
-                        boxSizing: "border-box",
-                      }}
-                      name="username"
-                      id="username"
-                      placeholder="Username"
-                      type="text"
-                      required
-                    />
-                  </Form.Group>
-                </Col>
-                <Col>
-                  <Form.Group>
-                    <Form.Control
-                      style={{
-                        width: "100%",
-                        padding: "12px 20px",
-                        margin: "8px 0",
-                        display: "inline-block",
-                        border: "1px solid #ccc",
-                        borderRadius: "4px",
-                        boxSizing: "border-box",
-                      }}
-                      name="password"
-                      id="password"
-                      placeholder="Password"
-                      type="password"
-                      required
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
-              <Button
-                style={{
-                  color: "#0d6efd",
-                  padding: "10px 30px",
-                  fontSize: "16px",
-                  margin: "10px 10px",
-                  backgroundColor: "#fff",
-                  border: "2px solid #0d6efd",
-                }}
-                variant="contained"
-                type="submit"
-              >
-                SIGNUP
-              </Button>
-
-              <Link to="/" style={{ textDecoration: "none" }}>
+            {!registered ? (
+              <Form onSubmit={signupSubmit}>
+                <h1>Signup</h1>
+                <Row>
+                  <Col>
+                    <Form.Group>
+                      <Form.Control
+                        style={{
+                          width: "100%",
+                          padding: "12px 20px",
+                          margin: "8px 0",
+                          display: "inline-block",
+                          border: "1px solid #ccc",
+                          borderRadius: "4px",
+                          boxSizing: "border-box",
+                        }}
+                        name="firstName"
+                        id="firstName"
+                        placeholder="First name"
+                        type="text"
+                        required
+                        onChange={onChange}
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col>
+                    <Form.Group>
+                      <Form.Control
+                        style={{
+                          width: "100%",
+                          padding: "12px 20px",
+                          margin: "8px 0",
+                          display: "inline-block",
+                          border: "1px solid #ccc",
+                          borderRadius: "4px",
+                          boxSizing: "border-box",
+                        }}
+                        name="lastName"
+                        id="lastName"
+                        placeholder="Last name"
+                        type="text"
+                        required
+                        onChange={onChange}
+                      />
+                    </Form.Group>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <Form.Group>
+                      <Form.Control
+                        style={{
+                          width: "100%",
+                          padding: "12px 20px",
+                          margin: "8px 0",
+                          display: "inline-block",
+                          border: "1px solid #ccc",
+                          borderRadius: "4px",
+                          boxSizing: "border-box",
+                        }}
+                        name="userName"
+                        id="userName"
+                        placeholder="Username"
+                        type="text"
+                        required
+                        onChange={onChange}
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col>
+                    <Form.Group>
+                      <Form.Control
+                        style={{
+                          width: "100%",
+                          padding: "12px 20px",
+                          margin: "8px 0",
+                          display: "inline-block",
+                          border: "1px solid #ccc",
+                          borderRadius: "4px",
+                          boxSizing: "border-box",
+                        }}
+                        name="password"
+                        id="password"
+                        placeholder="Password"
+                        type="password"
+                        required
+                        onChange={onChange}
+                      />
+                    </Form.Group>
+                  </Col>
+                </Row>
                 <Button
                   style={{
-                    color: "#fff",
+                    color: "#0d6efd",
                     padding: "10px 30px",
                     fontSize: "16px",
                     margin: "10px 10px",
-                    backgroundColor: "#0d6efd",
+                    backgroundColor: "#fff",
                     border: "2px solid #0d6efd",
                   }}
                   variant="contained"
+                  type="submit"
                 >
-                  CANCEL
+                  SIGNUP
                 </Button>
-              </Link>
-              <p>
-                Are you a nurse?{" "}
-                <Link to="/nurse-signup" style={{ textDecoration: "none" }}>
-                  Signup here.
+
+                <Link to="/" style={{ textDecoration: "none" }}>
+                  <Button
+                    style={{
+                      color: "#fff",
+                      padding: "10px 30px",
+                      fontSize: "16px",
+                      margin: "10px 10px",
+                      backgroundColor: "#0d6efd",
+                      border: "2px solid #0d6efd",
+                    }}
+                    variant="contained"
+                  >
+                    CANCEL
+                  </Button>
                 </Link>
-              </p>
-            </Form>
+                <p>
+                  Are you a nurse?{" "}
+                  <Link to="/nurse-signup" style={{ textDecoration: "none" }}>
+                    Signup here.
+                  </Link>
+                </p>
+              </Form>
+            ) : (
+              <SignUpSuccess accountType={"patient"} path={"/patient-login"} />
+            )}
             <FooterComponent color="black" />
           </div>
         </div>
