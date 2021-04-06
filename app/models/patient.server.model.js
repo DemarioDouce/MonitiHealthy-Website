@@ -6,18 +6,17 @@ const saltRounds = 10;
 
 // Define a new 'PatientSchema'
 var PatientSchema = new Schema({
-  firstName: String,
-  lastName: String,
-  email: {
+  firstName: { type: String, required: true },
+
+  lastName: { type: String, required: true },
+  userName: {
     type: String,
-    // Validate the email format
-    match: [/.+\@.+\..+/, "Please fill a valid email address"],
+    // Set a unique 'userName' index for nurse
+    unique: true,
+    // Validate 'username' value existance
+    required: "Username is required",
   },
-  phoneNumber: { type: Number, required: true },
 
-  address: { type: String, required: true },
-
-  city: { type: String, required: true },
   password: {
     type: String,
     // Validate the 'password' value length
@@ -26,11 +25,6 @@ var PatientSchema = new Schema({
       "Password should be longer",
     ],
   },
-  pulseRate: { type: Number, default: 0 },
-  bloodPressure: { type: Number, default: 0 },
-  weight: { type: Number, default: 0 },
-  temperature: { type: Number, default: 0 },
-  respiratoryRate: { type: Number, default: 0 },
 });
 
 // Set the 'fullname' virtual property
