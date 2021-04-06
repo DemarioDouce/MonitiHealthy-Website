@@ -7,18 +7,13 @@ const NurseSchema = new Schema({
   firstName: { type: String, required: true },
 
   lastName: { type: String, required: true },
-  employeeNumber: {
-    type: Number,
-    // Set a unique 'student number' index
+  userName: {
+    type: String,
+    // Set a unique 'userName' index for nurse
     unique: true,
     // Validate 'username' value existance
-    required: "Employee Number is required",
+    required: "Username is required",
   },
-  phoneNumber: { type: Number, required: true },
-
-  address: { type: String, required: true },
-
-  city: { type: String, required: true },
 
   password: {
     type: String,
