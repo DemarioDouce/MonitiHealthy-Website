@@ -13,11 +13,16 @@ import WomenWorkingOutImage from "../res/img/WomenWorkingOutImage.jpg";
 //Load react-router-dom package
 import { Link } from "react-router-dom";
 
-const PatientDashboardPage = () => {
+//PROPERTIES
+//user = prop that contains the patient's username
+//patientName = prop contains the patient's firstname
+//setScreen = prop that checks if the user is authenticated
+const PatientDashboardPage = ({ user, patientName, setScreen }) => {
   return (
     <>
       <Container>
-        <PatientBottomNavComponent index={0} />
+        {/* passing setScreen to patient navigation component*/}
+        <PatientBottomNavComponent index={0} setScreen={setScreen} />
         <div className="text-center">
           <div
             style={{
@@ -31,7 +36,7 @@ const PatientDashboardPage = () => {
               height: "50vh",
             }}
           >
-            <h1>Welcome Back</h1>
+            <h1>Welcome Back {patientName}</h1>
             {/* Card */}
             <Row>
               <Col>
