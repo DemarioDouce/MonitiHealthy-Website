@@ -8,7 +8,22 @@ import { Button } from "@material-ui/core";
 //Load react-router-dom package
 import { Link } from "react-router-dom";
 
-const PatientDashboardPage = () => {
+//PROPERTIES
+//user = prop that contains the nurse's username
+//nursename = prop contains the nurse's firstname
+//setScreen = prop that checks if the user is authenticated
+const NurseDashboardPage = ({ user, nurseName, setScreen }) => {
+  // called when nurse clicks on Logout button
+  // to clear the cookie and set the screen state variable
+  // back to its initial state.
+  const deleteCookie = async () => {
+    try {
+      await axios.get("/signoutnurse");
+      setScreen("auth");
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <>
       <Container>
@@ -25,7 +40,7 @@ const PatientDashboardPage = () => {
               height: "50vh",
             }}
           >
-            <h1>Welcome Back Nurse</h1>
+            <h1>Welcome Back Nurse {nurseName}!</h1>
             <Link to="/all-patient" style={{ textDecoration: "none" }}>
               <Button
                 style={{
@@ -52,6 +67,7 @@ const PatientDashboardPage = () => {
                   border: "2px solid #0d6efd",
                 }}
                 variant="contained"
+                onClick={deleteCookie}
               >
                 LOGOUT
               </Button>
@@ -64,4 +80,4 @@ const PatientDashboardPage = () => {
   );
 };
 
-export default PatientDashboardPage;
+export default NurseDashboardPage;
