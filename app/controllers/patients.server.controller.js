@@ -6,39 +6,11 @@ const config = require("../../config/config");
 const jwtExpirySeconds = 300;
 const jwtKey = config.secretKey;
 
-//
-// Create a new error handling controller method
-const getErrorMessage = function (err) {
-  // Define the error message variable
-  var message = "";
-
-  // If an internal MongoDB error occurs get the error message
-  if (err.code) {
-    switch (err.code) {
-      // If a unique index error occurs set the message error
-      case 11000:
-      case 11001:
-        message = "Username already exists";
-        break;
-      // If a general error occurs set the message error
-      default:
-        message = "Something went wrong";
-    }
-  } else {
-    // Grab the first error message from a list of possible errors
-    for (const errName in err.errors) {
-      if (err.errors[errName].message) message = err.errors[errName].message;
-    }
-  }
-
-  // Return the message error
-  return message;
-};
 // Create a new user
 exports.create = function (req, res, next) {
   // Create a new instance of the 'User' Mongoose model
   var patient = new Patient(req.body); //get data from React form
-  console.log("body: " + req.body.email);
+  console.log("body: " + req.body.userName);
 
   // Use the 'User' instance's 'save' method to save a new user document
   patient.save(function (err) {
@@ -85,7 +57,7 @@ exports.authenticate = function (req, res, next) {
           maxAge: jwtExpirySeconds * 1000,
           httpOnly: true,
         });
-        res.status(200).send({ screen: patient.email });
+        res.status(200).send({ screen: patient.firstName });
         //
 
         req.patient = patient;
@@ -139,7 +111,7 @@ exports.isSignedIn = (req, res) => {
   }
 
   // Finally, token is ok, return the firstName given in the token
-  res.status(200).send({ screen: payload.firstName, email: payload.email });
+  res.status(200).send({ screen: payload.firstName });
 };
 
 //isAuthenticated() method to check whether a user is currently authenticated
