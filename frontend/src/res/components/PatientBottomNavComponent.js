@@ -9,6 +9,7 @@ import NotificationImportantIcon from "@material-ui/icons/NotificationImportant"
 import HistoryIcon from "@material-ui/icons/History";
 import HomeIcon from "@material-ui/icons/Home";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import MovieIcon from "@material-ui/icons/Movie";
 //Load react-router-dom package
 import { Link } from "react-router-dom";
 
@@ -44,6 +45,12 @@ const PatientBottomNavComponent = ({ index, setScreen }) => {
         />
         <BottomNavigationAction
           component={Link}
+          to="/watch-video"
+          label="WATCH"
+          icon={<MovieIcon />}
+        />
+        <BottomNavigationAction
+          component={Link}
           to="/add-daily-info"
           label="ADD INFO"
           icon={<InfoIcon />}
@@ -60,8 +67,6 @@ const PatientBottomNavComponent = ({ index, setScreen }) => {
           label="SEND ALERT"
           icon={<NotificationImportantIcon />}
         />
-        {/* I dont think we need this button for the patient to access,
-        I think this feature needs to be on the nurse page - KEN */}
         <BottomNavigationAction
           component={Link}
           to="/alert-history"

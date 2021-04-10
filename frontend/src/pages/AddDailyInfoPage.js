@@ -14,7 +14,7 @@ const AddDailyInforPage = () => {
   return (
     <>
       <Container>
-        <PatientBottomNavComponent index={1} />
+        <PatientBottomNavComponent index={2} />
         <div className="text-center">
           <div
             style={{

@@ -6,7 +6,7 @@ function DailyInfoHistoryPage() {
   return (
     <>
       <Container>
-        <PatientBottomNavComponent index={2} />
+        <PatientBottomNavComponent index={3} />
         <div className="text-center">
           <div
             style={{

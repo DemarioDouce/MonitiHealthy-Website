@@ -14,7 +14,7 @@ const SendAlertPage = () => {
   return (
     <>
       <Container>
-        <PatientBottomNavComponent index={3} />
+        <PatientBottomNavComponent index={4} />
         <div className="text-center">
           <div
             style={{

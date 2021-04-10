@@ -6,7 +6,7 @@ function AlertHistoryPage() {
   return (
     <>
       <Container>
-        <PatientBottomNavComponent index={4} />
+        <PatientBottomNavComponent index={5} />
         <div className="text-center">
           <div
             style={{
