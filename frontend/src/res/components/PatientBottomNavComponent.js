@@ -23,6 +23,7 @@ const PatientBottomNavComponent = ({ index, setScreen }) => {
       await axios.get("/signoutpatient");
       setScreen("auth");
       console.log("Signed out");
+      localStorage.setItem("screen", "auth");
     } catch (e) {
       console.log(e);
     }
