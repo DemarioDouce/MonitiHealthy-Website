@@ -27,24 +27,24 @@ exports.create = function (req, res, next) {
 exports.authenticate = function (req, res, next) {
   // Get credentials from request
   console.log(req.body);
-  const email = req.body.auth.email;
+  const userName = req.body.auth.userName;
   const password = req.body.auth.password;
   console.log(password);
-  console.log(email);
+  console.log(userName);
   //find the user with given username using static method findOne
-  Patient.findOne({ email: email }, (err, patient) => {
+  Patient.findOne({ userName: userName }, (err, patient) => {
     if (err) {
       return next(err);
     } else {
       console.log(patient);
       //compare passwords
       if (bcrypt.compareSync(password, patient.password)) {
-        // Create a new token with the patient id, email, and firstName in the payload
+        // Create a new token with the patient id, username, and firstName in the payload
         // and which expires 300 seconds after issue
         const token = jwt.sign(
           {
             id: patient._id,
-            email: patient.email,
+            userName: patient.userName,
             firstName: patient.firstName,
           },
           jwtKey,
@@ -66,7 +66,7 @@ exports.authenticate = function (req, res, next) {
       } else {
         res.json({
           status: "error",
-          message: "Invalid email/password!!!",
+          message: "Invalid username/password!!!",
           data: null,
         });
       }
