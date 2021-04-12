@@ -64,9 +64,12 @@ function ViewAllPatientPage() {
                 right: "0",
                 margin: "auto",
                 width: "50vw",
-                height: "50vh",
+                height: "90vh",
               }}
             >
+              <Link to="/nurse-dashboard" style={{ textDecoration: "none" }}>
+                <p style={{ margin: "20px" }}>Go Back</p>
+              </Link>
               <ListGroup>
                 {patients.map((patient, id) => (
                   <ListGroup.Item
@@ -81,16 +84,23 @@ function ViewAllPatientPage() {
                       key: { id },
                     }}
                   >
-                    {patient.fullName}
+                    <h3>{patient.fullName}</h3>
                     <div style={{ visibility: "hidden" }}>
                       {patient.userName}
                     </div>
+                    <Button variant="contained" style={{ margin: "10px" }}>
+                      Add vital sign
+                    </Button>
+                    <Button variant="contained" style={{ margin: "10px" }}>
+                      View Daily Info
+                    </Button>
+                    <Button variant="contained" style={{ margin: "10px" }}>
+                      Send Motivational Tips
+                    </Button>
                   </ListGroup.Item>
                 ))}
               </ListGroup>
-              <Link to="/nurse-dashboard" style={{ textDecoration: "none" }}>
-                <p style={{ margin: "20px" }}>Go Back</p>
-              </Link>
+
               <FooterComponent color="black" />
             </div>
           </div>
