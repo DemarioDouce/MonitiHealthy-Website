@@ -14,6 +14,10 @@ import axios from "axios";
 const AddDailyInforPage = () => {
   const screen = localStorage.getItem("screen");
   const [thisScreen, setThisScreen] = useState(screen);
+  const [healthinfo, setHealth] = useState({
+    _id: "",
+    message: ""
+  });
   const readCookie = async () => {
     try {
       console.log("--- in readCookie function ---");

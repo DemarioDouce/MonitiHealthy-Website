@@ -133,6 +133,7 @@ exports.requiresLogin = function (req, res, next) {
     payload = jwt.verify(token, jwtKey);
     console.log("in requiresLogin - payload:", payload);
     req.id = payload.id;
+    req.patientUserName = payload.userName;
   } catch (e) {
     if (e instanceof jwt.JsonWebTokenError) {
       // if the error thrown is because the JWT is unauthorized, return a 401 error

@@ -15,6 +15,10 @@ import axios from "axios";
 const SendAlertPage = () => {
   const screen = localStorage.getItem("screen");
   const [thisScreen, setThisScreen] = useState(screen);
+  const [alert, setAlert] = useState({
+    _id: "",
+    message: ""
+  });
   const readCookie = async () => {
     try {
       console.log("--- in readCookie function ---");
@@ -31,10 +35,35 @@ const SendAlertPage = () => {
       console.log(e);
     }
   };
+  const onChange = (e) => {
+    e.persist();
+    setAlert({ ...alert, [e.target.name]: e.target.value });
+  };
+
+  const apiUrl = "http://localhost:3000/api/send-alert";
+
+  const alertSubmit = (e) => {
+    e.preventDefault();
+    
+    const data = {
+      message: alert.message,
+    };
+    axios
+      .post(apiUrl, data)
+      .then((result) => {
+        
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    console.log(data)
+  };
 
   useEffect(() => {
     readCookie();
   }, []);
+  
   return (
     <>
       {thisScreen !== "auth" ? (
@@ -53,7 +82,7 @@ const SendAlertPage = () => {
                 height: "50vh",
               }}
             >
-              <Form>
+              <Form onSubmit={alertSubmit}>
                 {/* message */}
                 <Form.Group>
                   <Form.Control
@@ -69,6 +98,7 @@ const SendAlertPage = () => {
                     as="textarea"
                     name="message"
                     id="message"
+                    onChange={onChange}
                     placeholder="Your message will be sent directly to the hospital you are
               associated with."
                     required

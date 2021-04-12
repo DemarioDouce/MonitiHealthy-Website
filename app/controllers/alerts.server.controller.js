@@ -1,4 +1,4 @@
-const Alert = require("mongoose").mongoose.model("Alert");
+const Alert = require("mongoose").model("Alert");
 const Patient = require("mongoose").model("Patient");
 const { ObjectId } = require("mongodb");
 
@@ -17,25 +17,25 @@ function getErrorMessage(err) {
 exports.create = function (req, res) {
     const alert = new Alert();
     alert.message = req.body.message;
-    alert.date = req.body.date;
-    var patient = req.patientUsername
+    alert.date = Date.now();
+    //var patient = req.patientUsername
     console.log(req.body)
     //
     //
-    Patient.findOne({username: patientUsername}, (err, patient) => {
+    console.log(req.patientUserName)
+    Patient.findOne({userName: req.patientUserName}, (err, patient) => {
 
         if (err) { return getErrorMessage(err); }
         //
         req.id = patient._id;
-        console.log('patient._id',req.id);
+        //console.log('patient._id',req.id);
+        console.log(patient)
 
 	
     }).then( function () 
     {
-        Alert.patient = req.id
-        Alert.log('req.patient._id',req.id);
-
-        Alert.save((err) => {
+        alert.patient = req.id
+        alert.save((err) => {
             if (err) {
                 console.log('error', getErrorMessage(err))
 
@@ -63,4 +63,26 @@ exports.read = function (req, res) {
     res.status(200).json(req.alert);
 };
 //
+exports.alertsbyPatient = async (req, res) => {
+
+    //let courseCode = req.body.auth.courseCode
+    //console.log(courseCode);
+    let alerts = await Alert.find({patient:ObjectId(req.id)});
+    console.log(alerts);
+    res.status(200).json(alerts)
+    //try{
+    //    var studArray = []
+    //    //student.forEach(element => {
+    //    //    studArray.push(element)
+    //    //});
+    //    for(let i = 0; i < student.length; i++){
+    //        studArray.push(student[i].student)
+    //    }
+    //    res.status(200).json(studArray)
+    //    
+    //}
+    //catch(e){
+    //    
+    //}
+};
 

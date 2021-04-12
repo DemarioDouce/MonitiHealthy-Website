@@ -8,6 +8,7 @@ import axios from "axios";
 function AlertHistoryPage() {
   const screen = localStorage.getItem("screen");
   const [thisScreen, setThisScreen] = useState(screen);
+  const [alerts, setAlerts] = useState([]);
   const readCookie = async () => {
     try {
       console.log("--- in readCookie function ---");
@@ -24,9 +25,32 @@ function AlertHistoryPage() {
       console.log(e);
     }
   };
-
+  const apiUrl = "http://localhost:3000/api/alerts";
   useEffect(() => {
     readCookie();
+    const getAlerts = async () => {
+      console.log("--- in getAlert function ---");
+      await axios.get(apiUrl)
+        .then(result => {
+          //console.log('result.data:',result.data)
+          //check if the user has logged in
+          //if(result.data.screen !== 'auth')
+          //{
+            
+            //console.log('data in if:', result.data )
+            //setData(result.data);
+            //setRowData(result.data);
+            console.log("--- in getAlertAxios function ---");
+            setAlerts(result.data)
+            //console.log(result.data)
+            
+          //}
+        }).catch((error) => {
+          console.log('error in fetchData:', error)
+        });
+        //rowsArray(data);
+      };  
+      getAlerts();
   }, []);
   return (
     <>
@@ -47,7 +71,7 @@ function AlertHistoryPage() {
               }}
             >
               <ListGroup>
-                <ListGroup.Item
+                {alerts.map((alert) => (<ListGroup.Item
                   style={{
                     width: "100%",
                     padding: "12px 20px",
@@ -58,21 +82,10 @@ function AlertHistoryPage() {
                     boxSizing: "border-box",
                   }}
                 >
-                  Cras justo odio
-                </ListGroup.Item>
-                <ListGroup.Item
-                  style={{
-                    width: "100%",
-                    padding: "12px 20px",
-                    margin: "8px 0",
-                    display: "inline-block",
-                    border: "1px solid #ccc",
-                    borderRadius: "4px",
-                    boxSizing: "border-box",
-                  }}
-                >
-                  Dapibus ac facilisis in
-                </ListGroup.Item>
+                  Message: {alert.message}<br></br>
+                  Sent: {alert.date}
+                </ListGroup.Item>))}
+                
               </ListGroup>
             </div>
           </div>

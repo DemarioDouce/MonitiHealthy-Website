@@ -1,4 +1,4 @@
-const HealthInfo = require("mongoose").mongoose.model("HealthInfo");
+const HealthInfo = require("mongoose").model("HealthInfo");
 const Patient = require("mongoose").model("Patient");
 const { ObjectId } = require("mongodb");
 
@@ -36,7 +36,7 @@ exports.create = function (req, res) {
 	
     }).then( function () 
     {
-        healthInfo.patient = req.id
+        healthInfo.patient = patient
         console.log('req.patient._id',req.id);
 
         healthInfo.save((err) => {
