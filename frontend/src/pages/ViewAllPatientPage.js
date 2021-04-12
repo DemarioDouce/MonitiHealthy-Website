@@ -9,7 +9,7 @@ import React, { useState, useEffect } from "react";
 import App from "../App";
 import { Hidden } from "@material-ui/core";
 
-function ViewAllPatientPage() {
+function ViewAllPatientPage(props) {
   const scsreen = localStorage.getItem("screen");
   const [thisScreen, setThisScreen] = useState(screen);
   const [patients, setPatients] = useState([]);
@@ -50,6 +50,13 @@ function ViewAllPatientPage() {
     fetchData();
   }, []);
 
+  const addVitalOnclick = (userName, fullName) => {
+    props.history.push({
+      pathname: "/add-vital-sign",
+      state: { userName, fullName },
+    });
+  };
+
   return (
     <>
       {thisScreen !== "auth" ? (
@@ -85,16 +92,24 @@ function ViewAllPatientPage() {
                     }}
                   >
                     <h3>{patient.fullName}</h3>
-                    <div style={{ visibility: "hidden" }}>
-                      {patient.userName}
-                    </div>
-                    <Button variant="contained" style={{ margin: "10px" }}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      style={{ margin: "10px" }}
+                      onClick={() => {
+                        addVitalOnclick(patient.userName, patient.fullName);
+                      }}
+                    >
                       Add vital sign
                     </Button>
                     <Button variant="contained" style={{ margin: "10px" }}>
-                      View Daily Info
+                      View Information
                     </Button>
-                    <Button variant="contained" style={{ margin: "10px" }}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      style={{ margin: "10px" }}
+                    >
                       Send Motivational Tips
                     </Button>
                   </ListGroup.Item>
