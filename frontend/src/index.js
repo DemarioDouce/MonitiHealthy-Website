@@ -20,6 +20,7 @@ import AlertHistoryPage from "./pages/AlertHistoryPage";
 import ViewAllPatientPage from "./pages/ViewAllPatientPage";
 import PatientHealthTipsPage from "./pages/PatientHealthTipsPage";
 import WatchVideoPage from "./pages/WatchVideoPage";
+import NurseAddVitalSignPage from "./pages/NurseAddVitalSignPage";
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
@@ -52,6 +53,8 @@ ReactDOM.render(
       <Route path="/health-tips" component={PatientHealthTipsPage} exact />
       {/* Patient watch video page  */}
       <Route path="/watch-video" component={WatchVideoPage} exact />
+      {/* Nurse add vital sign page */}
+      <Route path="/add-vital-sign" component={NurseAddVitalSignPage} exact />
     </Switch>
   </BrowserRouter>,
   document.getElementById("root")
