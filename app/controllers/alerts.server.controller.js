@@ -32,10 +32,10 @@ exports.create = function (req, res) {
 	
     }).then( function () 
     {
-        course.patient = req.id
-        console.log('req.patient._id',req.id);
+        Alert.patient = req.id
+        Alert.log('req.patient._id',req.id);
 
-        course.save((err) => {
+        Alert.save((err) => {
             if (err) {
                 console.log('error', getErrorMessage(err))
 
@@ -43,7 +43,7 @@ exports.create = function (req, res) {
                     message: getErrorMessage(err)
                 });
             } else {
-                res.status(200).json(course);
+                res.status(200).json(Alert);
             }
         });
     
