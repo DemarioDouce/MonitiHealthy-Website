@@ -20,7 +20,7 @@ const AddDailyInforPage = () => {
     bloodPressure: "",
     weight: "",
     temperature: "",
-    respiratoryRate: ""
+    respiratoryRate: "",
   });
   const readCookie = async () => {
     try {
@@ -47,24 +47,33 @@ const AddDailyInforPage = () => {
 
   const healthInfoSubmit = (e) => {
     e.preventDefault();
-    
+
     const data = {
       pulseRate: healthinfo.pulseRate,
       bloodPressure: healthinfo.bloodPressure,
       weight: healthinfo.weight,
       temperature: healthinfo.temperature,
-      respiratoryRate: healthinfo.respiratoryRate
+      respiratoryRate: healthinfo.respiratoryRate,
     };
     axios
       .post(apiUrl, data)
       .then((result) => {
-        console.log(result.data)
+        console.log(result.data);
       })
       .catch((error) => {
         console.log(error);
       });
 
-    console.log(data)
+    console.log(data);
+    setHealthInfo({
+      _id: "",
+      pulseRate: "",
+      bloodPressure: "",
+      weight: "",
+      temperature: "",
+      respiratoryRate: "",
+    });
+    alert("Daily info added");
   };
 
   useEffect(() => {
@@ -106,6 +115,7 @@ const AddDailyInforPage = () => {
                     placeholder="Pulse rate (per min) e.g 80"
                     type="number"
                     required
+                    value={healthinfo.pulseRate}
                     onChange={onChange}
                   />
                 </Form.Group>
@@ -126,6 +136,7 @@ const AddDailyInforPage = () => {
                     placeholder="Blood pressure (systolic/diastolic mm hg) e.g 120/80"
                     type="text"
                     required
+                    value={healthinfo.bloodPressure}
                     onChange={onChange}
                   />
                 </Form.Group>
@@ -146,6 +157,7 @@ const AddDailyInforPage = () => {
                     placeholder="Weight (lb) e.g 120.9"
                     type="number"
                     required
+                    value={healthinfo.weight}
                     onChange={onChange}
                   />
                 </Form.Group>
@@ -166,6 +178,7 @@ const AddDailyInforPage = () => {
                     placeholder="Temperature (C) e.g 23.5"
                     type="number"
                     required
+                    value={healthinfo.temperature}
                     onChange={onChange}
                   />
                 </Form.Group>
@@ -186,6 +199,7 @@ const AddDailyInforPage = () => {
                     placeholder="Respiratory rate (per min) e.g 16"
                     type="number"
                     required
+                    value={healthinfo.respiratoryRate}
                     onChange={onChange}
                   />
                 </Form.Group>

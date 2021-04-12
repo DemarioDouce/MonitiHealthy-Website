@@ -15,9 +15,9 @@ import axios from "axios";
 const SendAlertPage = () => {
   const screen = localStorage.getItem("screen");
   const [thisScreen, setThisScreen] = useState(screen);
-  const [alert, setAlert] = useState({
+  const [alertMessage, setAlertMessage] = useState({
     _id: "",
-    message: ""
+    message: "",
   });
   const readCookie = async () => {
     try {
@@ -37,33 +37,33 @@ const SendAlertPage = () => {
   };
   const onChange = (e) => {
     e.persist();
-    setAlert({ ...alert, [e.target.name]: e.target.value });
+    setAlertMessage({ ...alertMessage, [e.target.name]: e.target.value });
   };
 
   const apiUrl = "http://localhost:3000/api/send-alert";
 
   const alertSubmit = (e) => {
     e.preventDefault();
-    
+
     const data = {
-      message: alert.message,
+      message: alertMessage.message,
     };
     axios
       .post(apiUrl, data)
-      .then((result) => {
-        
-      })
+      .then((result) => {})
       .catch((error) => {
         console.log(error);
       });
 
-    console.log(data)
+    console.log(data);
+    setAlertMessage({ message: "" });
+    alert("Help is on the way!");
   };
 
   useEffect(() => {
     readCookie();
   }, []);
-  
+
   return (
     <>
       {thisScreen !== "auth" ? (
@@ -99,6 +99,7 @@ const SendAlertPage = () => {
                     name="message"
                     id="message"
                     onChange={onChange}
+                    value={alertMessage.message}
                     placeholder="Your message will be sent directly to the hospital you are
               associated with."
                     required
