@@ -13,7 +13,7 @@ import App from "../App";
 const NurseDashboardPage = (props) => {
   const { userName, screen } = (props.location && props.location.state) || {};
   const [thisScreen, setThisScreen] = useState(screen);
-  localStorage.setItem("screen", thisScreen);
+
   const deleteCookie = async () => {
     try {
       await axios.get("/signoutnurse");

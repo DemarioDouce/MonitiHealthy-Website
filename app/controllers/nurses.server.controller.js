@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 const config = require("../../config/config");
 const jwtExpirySeconds = 300;
 const jwtKey = config.secretKey;
-const Patient = require("mongoose").model("Patient");
 
 //
 exports.create = function (req, res, next) {
@@ -142,16 +141,4 @@ exports.requiresLogin = function (req, res, next) {
   // student is authenticated
   //call next function in line
   next();
-};
-
-exports.listPatients = function (req, res, next) {
-  // Use the 'Student' instance's 'find' method to retrieve a new student document
-  Patient.find({}, function (err, patients) {
-    if (err) {
-      return next(err);
-    } else {
-      res.json(patients);
-      console.log(patients);
-    }
-  });
 };
