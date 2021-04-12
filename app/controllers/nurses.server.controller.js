@@ -4,6 +4,21 @@ const jwt = require("jsonwebtoken");
 const config = require("../../config/config");
 const jwtExpirySeconds = 300;
 const jwtKey = config.secretKey;
+const { ObjectId } = require("mongodb");
+const Patient = require("mongoose").model("Patient");
+const HealthInfo = require("mongoose").model("HealthInfo");
+
+
+function getErrorMessage(err) {
+  if (err.errors) {
+      for (let errName in err.errors) {
+          if (err.errors[errName].message) return err.errors[errName].
+              message;
+      }
+  } else {
+      return 'Unknown server error';
+  }
+};
 
 //
 exports.create = function (req, res, next) {
@@ -141,4 +156,80 @@ exports.requiresLogin = function (req, res, next) {
   // student is authenticated
   //call next function in line
   next();
+};
+
+exports.patientByID = function (req, res, next, id) {
+  Patient.findById(id).populate('patient', 'firstName lastName fullName').exec((err, patient) => {if (err) return next(err);
+  if (!patient) return next(new Error('Failed to load course '
+          + id));
+      req.id = patient._id;
+      console.log('in patientById:', req.id)
+      next();
+  });
+};
+
+exports.addPatientHealthInfo = function (req, res) {
+  const healthInfo = new HealthInfo();
+  healthInfo.pulseRate = req.body.pulseRate;
+  healthInfo.bloodPressure = req.body.bloodPressure;
+  healthInfo.weight = req.body.weight;
+  healthInfo.temperature = req.body.temperature;
+  healthInfo.respiratoryRate = req.body.respiratoryRate;
+
+  //var patient = req.patientUsername
+  //console.log(req.body)
+  //
+  //
+  //let patient = await Patient.findById({patient:ObjectId(req.id)});
+  Patient.findById({_id:ObjectId(req.id)}, (err, patient) => {
+
+      if (err) { return getErrorMessage(err); }
+      //
+      req.id = patient._id;
+      //console.log('patient._id',req.id);
+      //console.log(patient)
+
+
+  }).then( function () 
+  {
+      healthInfo.patient = req.id
+      console.log('req.patient._id',req.id);
+
+      healthInfo.save((err) => {
+          if (err) {
+              console.log('error', getErrorMessage(err))
+
+              return res.status(400).send({
+                  message: getErrorMessage(err)
+              });
+          } else {
+              res.status(200).json(healthInfo);
+          }
+      });
+  
+  });
+};
+
+exports.healthinfobyPatient = async (req, res, id) => {
+
+  //let courseCode = req.body.auth.courseCode
+  //console.log(courseCode);
+  console.log(req.id);
+  let healthinfos = await HealthInfo.find({patient:ObjectId(req.id)});
+  console.log(healthinfos);
+  res.status(200).json(healthinfos)
+  //try{
+  //    var studArray = []
+  //    //student.forEach(element => {
+  //    //    studArray.push(element)
+  //    //});
+  //    for(let i = 0; i < student.length; i++){
+  //        studArray.push(student[i].student)
+  //    }
+  //    res.status(200).json(studArray)
+  //    
+  //}
+  //catch(e){
+  //    
+  //}
 };

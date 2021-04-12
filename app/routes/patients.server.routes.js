@@ -8,4 +8,6 @@ module.exports = function (app) {
   app.post("/signinpatient", patients.authenticate);
   app.get("/signoutpatient", patients.signout);
   app.get("/read_cookie", patients.isSignedIn);
+
+  
 };
