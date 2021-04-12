@@ -7,6 +7,7 @@ import axios from "axios";
 function DailyInfoHistoryPage() {
   const screen = localStorage.getItem("screen");
   const [thisScreen, setThisScreen] = useState(screen);
+  const [healthinfos, setHealthinfos] = useState([]);
   const readCookie = async () => {
     try {
       console.log("--- in readCookie function ---");
@@ -23,9 +24,34 @@ function DailyInfoHistoryPage() {
       console.log(e);
     }
   };
+  const apiUrl = "http://localhost:3000/api/all-healthinfo";
 
   useEffect(() => {
     readCookie();
+    const getHealthInfo = async () => {
+      console.log("--- in getAlert function ---");
+      await axios.get(apiUrl)
+        .then(result => {
+          //console.log('result.data:',result.data)
+          //check if the user has logged in
+          //if(result.data.screen !== 'auth')
+          //{
+            
+            //console.log('data in if:', result.data )
+            //setData(result.data);
+            //setRowData(result.data);
+            console.log("--- in getAlertAxios function ---");
+            console.log(result.data);
+            setHealthinfos(result.data)
+            //console.log(result.data)
+            
+          //}
+        }).catch((error) => {
+          console.log('error in fetchData:', error)
+        });
+        //rowsArray(data);
+      };  
+      getHealthInfo();
   }, []);
   return (
     <>
@@ -46,7 +72,7 @@ function DailyInfoHistoryPage() {
               }}
             >
               <ListGroup>
-                <ListGroup.Item
+                {healthinfos.map((healthinfo) => (<ListGroup.Item
                   style={{
                     width: "100%",
                     padding: "12px 20px",
@@ -57,21 +83,13 @@ function DailyInfoHistoryPage() {
                     boxSizing: "border-box",
                   }}
                 >
-                  Cras justo odio
-                </ListGroup.Item>
-                <ListGroup.Item
-                  style={{
-                    width: "100%",
-                    padding: "12px 20px",
-                    margin: "8px 0",
-                    display: "inline-block",
-                    border: "1px solid #ccc",
-                    borderRadius: "4px",
-                    boxSizing: "border-box",
-                  }}
-                >
-                  Dapibus ac facilisis in
-                </ListGroup.Item>
+                  Pulse Rate: {healthinfo.pulseRate}<br></br>
+                  Weight: {healthinfo.weight}<br></br>
+                  Temperature: {healthinfo.temperature}<br></br>
+                  Blood Pressure: {healthinfo.bloodPressure}<br></br>
+                  Respiratory Rate: {healthinfo.respiratoryRate}<br></br>
+                </ListGroup.Item>))}
+                
               </ListGroup>
             </div>
           </div>

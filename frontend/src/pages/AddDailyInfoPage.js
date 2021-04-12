@@ -14,9 +14,13 @@ import axios from "axios";
 const AddDailyInforPage = () => {
   const screen = localStorage.getItem("screen");
   const [thisScreen, setThisScreen] = useState(screen);
-  const [healthinfo, setHealth] = useState({
+  const [healthinfo, setHealthInfo] = useState({
     _id: "",
-    message: ""
+    pulseRate: "",
+    bloodPressure: "",
+    weight: "",
+    temperature: "",
+    respiratoryRate: ""
   });
   const readCookie = async () => {
     try {
@@ -33,6 +37,34 @@ const AddDailyInforPage = () => {
       setThisScreen("auth");
       console.log(e);
     }
+  };
+  const onChange = (e) => {
+    e.persist();
+    setHealthInfo({ ...healthinfo, [e.target.name]: e.target.value });
+  };
+
+  const apiUrl = "http://localhost:3000/api/add-healthInfo";
+
+  const healthInfoSubmit = (e) => {
+    e.preventDefault();
+    
+    const data = {
+      pulseRate: healthinfo.pulseRate,
+      bloodPressure: healthinfo.bloodPressure,
+      weight: healthinfo.weight,
+      temperature: healthinfo.temperature,
+      respiratoryRate: healthinfo.respiratoryRate
+    };
+    axios
+      .post(apiUrl, data)
+      .then((result) => {
+        console.log(result.data)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    console.log(data)
   };
 
   useEffect(() => {
@@ -57,7 +89,7 @@ const AddDailyInforPage = () => {
               }}
             >
               {/* pulseRate */}
-              <Form>
+              <Form onSubmit={healthInfoSubmit}>
                 <Form.Group>
                   <Form.Control
                     style={{
@@ -72,8 +104,9 @@ const AddDailyInforPage = () => {
                     name="pulseRate"
                     id="pulseRate"
                     placeholder="Pulse rate (per min) e.g 80"
-                    type="text"
+                    type="number"
                     required
+                    onChange={onChange}
                   />
                 </Form.Group>
                 {/* bloodPressure */}
@@ -91,8 +124,9 @@ const AddDailyInforPage = () => {
                     name="bloodPressure"
                     id="bloodPressure"
                     placeholder="Blood pressure (systolic/diastolic mm hg) e.g 120/80"
-                    type="number"
+                    type="text"
                     required
+                    onChange={onChange}
                   />
                 </Form.Group>
                 {/* weight */}
@@ -112,6 +146,7 @@ const AddDailyInforPage = () => {
                     placeholder="Weight (lb) e.g 120.9"
                     type="number"
                     required
+                    onChange={onChange}
                   />
                 </Form.Group>
                 {/* temperature */}
@@ -131,6 +166,7 @@ const AddDailyInforPage = () => {
                     placeholder="Temperature (C) e.g 23.5"
                     type="number"
                     required
+                    onChange={onChange}
                   />
                 </Form.Group>
                 {/* respiratoryRate */}
@@ -150,6 +186,7 @@ const AddDailyInforPage = () => {
                     placeholder="Respiratory rate (per min) e.g 16"
                     type="number"
                     required
+                    onChange={onChange}
                   />
                 </Form.Group>
                 <Button

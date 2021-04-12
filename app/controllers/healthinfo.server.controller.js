@@ -20,23 +20,23 @@ exports.create = function (req, res) {
     healthInfo.weight = req.body.weight;
     healthInfo.temperature = req.body.temperature;
     healthInfo.respiratoryRate = req.body.respiratoryRate;
-    healthInfo.respiratoryRate = req.body.respiratoryRate;
 
     var patient = req.patientUsername
     console.log(req.body)
     //
     //
-    Patient.findOne({username: patientUsername}, (err, patient) => {
+    Patient.findOne({userName: req.patientUserName}, (err, patient) => {
 
         if (err) { return getErrorMessage(err); }
         //
         req.id = patient._id;
-        console.log('patient._id',req.id);
+        //console.log('patient._id',req.id);
+        console.log(patient)
 
 	
     }).then( function () 
     {
-        healthInfo.patient = patient
+        healthInfo.patient = req.id
         console.log('req.patient._id',req.id);
 
         healthInfo.save((err) => {
@@ -52,6 +52,15 @@ exports.create = function (req, res) {
         });
     
     });
+};
+
+exports.healthinfobyPatient = async (req, res) => {
+
+    
+    let healthinfo = await HealthInfo.find({patient:ObjectId(req.id)});
+    console.log(healthinfo);
+    res.status(200).json(healthinfo)
+   
 };
 
 
