@@ -6,5 +6,7 @@ module.exports = function (app) {
   //authenticate user
   app.post("/signinnurse", nurses.authenticate);
   app.get("/signoutnurse", nurses.signout);
-  app.get("/read_cookie", nurses.isSignedIn);
+  app.get("/nurse_read_cookie", nurses.isSignedIn);
+
+  app.get("/list-patients", nurses.requiresLogin, nurses.listPatients);
 };

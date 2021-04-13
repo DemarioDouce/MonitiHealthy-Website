@@ -6,39 +6,11 @@ const config = require("../../config/config");
 const jwtExpirySeconds = 300;
 const jwtKey = config.secretKey;
 
-//
-// Create a new error handling controller method
-const getErrorMessage = function (err) {
-  // Define the error message variable
-  var message = "";
-
-  // If an internal MongoDB error occurs get the error message
-  if (err.code) {
-    switch (err.code) {
-      // If a unique index error occurs set the message error
-      case 11000:
-      case 11001:
-        message = "Username already exists";
-        break;
-      // If a general error occurs set the message error
-      default:
-        message = "Something went wrong";
-    }
-  } else {
-    // Grab the first error message from a list of possible errors
-    for (const errName in err.errors) {
-      if (err.errors[errName].message) message = err.errors[errName].message;
-    }
-  }
-
-  // Return the message error
-  return message;
-};
 // Create a new user
 exports.create = function (req, res, next) {
   // Create a new instance of the 'User' Mongoose model
   var patient = new Patient(req.body); //get data from React form
-  console.log("body: " + req.body.email);
+  console.log("body: " + req.body.userName);
 
   // Use the 'User' instance's 'save' method to save a new user document
   patient.save(function (err) {
@@ -55,24 +27,24 @@ exports.create = function (req, res, next) {
 exports.authenticate = function (req, res, next) {
   // Get credentials from request
   console.log(req.body);
-  const email = req.body.auth.email;
+  const userName = req.body.auth.userName;
   const password = req.body.auth.password;
   console.log(password);
-  console.log(email);
+  console.log(userName);
   //find the user with given username using static method findOne
-  Patient.findOne({ email: email }, (err, patient) => {
+  Patient.findOne({ userName: userName }, (err, patient) => {
     if (err) {
       return next(err);
     } else {
       console.log(patient);
       //compare passwords
       if (bcrypt.compareSync(password, patient.password)) {
-        // Create a new token with the patient id, email, and firstName in the payload
+        // Create a new token with the patient id, username, and firstName in the payload
         // and which expires 300 seconds after issue
         const token = jwt.sign(
           {
             id: patient._id,
-            email: patient.email,
+            userName: patient.userName,
             firstName: patient.firstName,
           },
           jwtKey,
@@ -85,7 +57,7 @@ exports.authenticate = function (req, res, next) {
           maxAge: jwtExpirySeconds * 1000,
           httpOnly: true,
         });
-        res.status(200).send({ screen: patient.email });
+        res.status(200).send({ screen: patient.firstName });
         //
 
         req.patient = patient;
@@ -94,7 +66,7 @@ exports.authenticate = function (req, res, next) {
       } else {
         res.json({
           status: "error",
-          message: "Invalid email/password!!!",
+          message: "Invalid username/password!!!",
           data: null,
         });
       }
@@ -139,7 +111,7 @@ exports.isSignedIn = (req, res) => {
   }
 
   // Finally, token is ok, return the firstName given in the token
-  res.status(200).send({ screen: payload.firstName, email: payload.email });
+  res.status(200).send({ screen: payload.firstName });
 };
 
 //isAuthenticated() method to check whether a user is currently authenticated
@@ -161,6 +133,7 @@ exports.requiresLogin = function (req, res, next) {
     payload = jwt.verify(token, jwtKey);
     console.log("in requiresLogin - payload:", payload);
     req.id = payload.id;
+    req.patientUserName = payload.userName;
   } catch (e) {
     if (e instanceof jwt.JsonWebTokenError) {
       // if the error thrown is because the JWT is unauthorized, return a 401 error

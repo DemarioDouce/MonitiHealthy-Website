@@ -4,20 +4,12 @@ const jwt = require("jsonwebtoken");
 const config = require("../../config/config");
 const jwtExpirySeconds = 300;
 const jwtKey = config.secretKey;
+const Patient = require("mongoose").model("Patient");
 
-function getErrorMessage(err) {
-  if (err.errors) {
-    for (let errName in err.errors) {
-      if (err.errors[errName].message) return err.errors[errName].message;
-    }
-  } else {
-    return "Unknown server error";
-  }
-}
 //
 exports.create = function (req, res, next) {
   const nurse = new Nurse(req.body);
-  console.log("body: " + req.body.employeeNumber);
+  console.log("body: " + req.body.userName);
 
   // Use the 'Nurse' instance's 'save' method to save a new nurse document
   nurse.save(function (err) {
@@ -34,24 +26,24 @@ exports.create = function (req, res, next) {
 exports.authenticate = function (req, res, next) {
   // Get credentials from request
   console.log(req.body);
-  const employeeNumber = req.body.auth.employeeNumber;
+  const userName = req.body.auth.userName;
   const password = req.body.auth.password;
+  console.log(userName);
   console.log(password);
-  console.log(employeeNumber);
-  //find the nurse with given employeeNumber using static method findOne
-  Nurse.findOne({ employeeNumber: employeeNumber }, (err, nurse) => {
+  //find the nurse with given userName using static method findOne
+  Nurse.findOne({ userName: userName }, (err, nurse) => {
     if (err) {
       return next(err);
     } else {
       console.log(nurse);
       //compare passwords
       if (bcrypt.compareSync(password, nurse.password)) {
-        // Create a new token with the nurse id, employee number, and firstname in the payload
+        // Create a new token with the nurse id, userName number, and firstname in the payload
         // and which expires 300 seconds after issue
         const token = jwt.sign(
           {
             id: nurse._id,
-            employeeNumber: nurse.employeeNumber,
+            userName: nurse.userName,
             firstName: nurse.firstName,
           },
           jwtKey,
@@ -64,7 +56,7 @@ exports.authenticate = function (req, res, next) {
           maxAge: jwtExpirySeconds * 1000,
           httpOnly: true,
         });
-        res.status(200).send({ screen: nurse.employeeNumber });
+        res.status(200).send({ screen: nurse.firstName });
         //
 
         req.nurse = nurse;
@@ -73,7 +65,7 @@ exports.authenticate = function (req, res, next) {
       } else {
         res.json({
           status: "error",
-          message: "Invalid employee number/password!!!",
+          message: "Invalid userName/password!!!",
           data: null,
         });
       }
@@ -150,4 +142,16 @@ exports.requiresLogin = function (req, res, next) {
   // student is authenticated
   //call next function in line
   next();
+};
+
+exports.listPatients = function (req, res, next) {
+  // Use the 'Student' instance's 'find' method to retrieve a new student document
+  Patient.find({}, function (err, patients) {
+    if (err) {
+      return next(err);
+    } else {
+      res.json(patients);
+      console.log(patients);
+    }
+  });
 };

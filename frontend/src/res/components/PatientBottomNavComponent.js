@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 //Load @material-ui/core package
 import { BottomNavigation, BottomNavigationAction } from "@material-ui/core";
 //Load material-ui/icons package
@@ -8,11 +9,25 @@ import NotificationImportantIcon from "@material-ui/icons/NotificationImportant"
 import HistoryIcon from "@material-ui/icons/History";
 import HomeIcon from "@material-ui/icons/Home";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import MovieIcon from "@material-ui/icons/Movie";
 //Load react-router-dom package
 import { Link } from "react-router-dom";
 
-const PatientBottomNavComponent = ({ index }) => {
+const PatientBottomNavComponent = ({ index, setScreen }) => {
   const [value, setValue] = useState(index);
+
+  //this function will be called when the patient clicks on logout
+  //and sets the screen back to auth
+  const deleteCookie = async () => {
+    try {
+      await axios.get("/signoutpatient");
+      setScreen("auth");
+      console.log("Signed out");
+      localStorage.setItem("screen", "auth");
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <>
       <BottomNavigation
@@ -28,6 +43,12 @@ const PatientBottomNavComponent = ({ index }) => {
           to="/patient-dashboard"
           label="HOME"
           icon={<HomeIcon />}
+        />
+        <BottomNavigationAction
+          component={Link}
+          to="/watch-video"
+          label="WATCH"
+          icon={<MovieIcon />}
         />
         <BottomNavigationAction
           component={Link}
@@ -55,7 +76,7 @@ const PatientBottomNavComponent = ({ index }) => {
         />
         <BottomNavigationAction
           component={Link}
-          to="/"
+          onClick={deleteCookie}
           label="LOGOUT"
           icon={<ExitToAppIcon />}
         />

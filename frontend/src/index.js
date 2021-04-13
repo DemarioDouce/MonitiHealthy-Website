@@ -18,7 +18,10 @@ import DailyInfoHistoryPage from "./pages/DailyInfoHistoryPage";
 import SendAlertPage from "./pages/SendAlertPage";
 import AlertHistoryPage from "./pages/AlertHistoryPage";
 import ViewAllPatientPage from "./pages/ViewAllPatientPage";
-
+import PatientHealthTipsPage from "./pages/PatientHealthTipsPage";
+import WatchVideoPage from "./pages/WatchVideoPage";
+import NurseAddVitalSignPage from "./pages/NurseAddVitalSignPage";
+import AiPage from "./pages/AiPage";
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
@@ -47,6 +50,14 @@ ReactDOM.render(
       <Route path="/alert-history" component={AlertHistoryPage} exact />
       {/* All all patient */}
       <Route path="/all-patient" component={ViewAllPatientPage} exact />
+      {/* Patient health tip page  */}
+      <Route path="/health-tips" component={PatientHealthTipsPage} exact />
+      {/* Patient watch video page  */}
+      <Route path="/watch-video" component={WatchVideoPage} exact />
+      {/* Nurse add vital sign page */}
+      <Route path="/add-vital-sign" component={NurseAddVitalSignPage} exact />
+      {/* Ai page*/}
+      <Route path="/ai" component={AiPage} exact />
     </Switch>
   </BrowserRouter>,
   document.getElementById("root")
