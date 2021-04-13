@@ -10,6 +10,7 @@ import HistoryIcon from "@material-ui/icons/History";
 import HomeIcon from "@material-ui/icons/Home";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import MovieIcon from "@material-ui/icons/Movie";
+import BookIcon from "@material-ui/icons/Book";
 //Load react-router-dom package
 import { Link } from "react-router-dom";
 
@@ -73,6 +74,12 @@ const PatientBottomNavComponent = ({ index, setScreen }) => {
           to="/alert-history"
           label="ALERT HISTORY"
           icon={<HistoryIcon />}
+        />
+        <BottomNavigationAction
+          component={Link}
+          to="/motivational-tips"
+          label="Motivational Tips"
+          icon={<BookIcon />}
         />
         <BottomNavigationAction
           component={Link}

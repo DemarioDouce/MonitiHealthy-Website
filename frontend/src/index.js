@@ -22,6 +22,7 @@ import PatientHealthTipsPage from "./pages/PatientHealthTipsPage";
 import WatchVideoPage from "./pages/WatchVideoPage";
 import PatientMedHistoryNurse from "./pages/PatientMedHistoryNurse";
 import NurseAddDailyInfoPage from "./pages/NurseAddDailyInfoPage";
+import PatientMotivationalTipsPage from "./pages/PatientMotivationalTipsPage";
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
@@ -50,12 +51,26 @@ ReactDOM.render(
       <Route path="/alert-history" component={AlertHistoryPage} exact />
       {/* All all patient */}
       <Route path="/all-patient" component={ViewAllPatientPage} exact />
-      <Route path="/all-patient-medinfo" component={PatientMedHistoryNurse} exact />
-      <Route path="/nurse-add-patientinfo" component={NurseAddDailyInfoPage} exact />
+      <Route
+        path="/all-patient-medinfo"
+        component={PatientMedHistoryNurse}
+        exact
+      />
+      <Route
+        path="/nurse-add-patientinfo"
+        component={NurseAddDailyInfoPage}
+        exact
+      />
       {/* Patient health tip page  */}
       <Route path="/health-tips" component={PatientHealthTipsPage} exact />
       {/* Patient watch video page  */}
       <Route path="/watch-video" component={WatchVideoPage} exact />
+      {/* Patient motivational tips page  */}
+      <Route
+        path="/motivational-tips"
+        component={PatientMotivationalTipsPage}
+        exact
+      />
     </Switch>
   </BrowserRouter>,
   document.getElementById("root")
