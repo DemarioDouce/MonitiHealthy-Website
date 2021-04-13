@@ -15,7 +15,7 @@ import axios from "axios";
 const SendAlertPage = () => {
   const screen = localStorage.getItem("screen");
   const [thisScreen, setThisScreen] = useState(screen);
-  const [alert, setAlert] = useState({
+  const [thisAlert, setThisAlert] = useState({
     _id: "",
     message: "",
   });
@@ -37,7 +37,7 @@ const SendAlertPage = () => {
   };
   const onChange = (e) => {
     e.persist();
-    setAlert({ ...alert, [e.target.name]: e.target.value });
+    setThisAlert({ ...alert, [e.target.name]: e.target.value });
   };
 
   const apiUrl = "http://localhost:3000/api/send-alert";
@@ -46,7 +46,7 @@ const SendAlertPage = () => {
     e.preventDefault();
 
     const data = {
-      message: alert.message,
+      message: thisAlert.message,
     };
     axios
       .post(apiUrl, data)
@@ -56,6 +56,8 @@ const SendAlertPage = () => {
       });
 
     console.log(data);
+    setThisAlert({ message: "" });
+    alert("Help is on the way!");
   };
 
   useEffect(() => {
@@ -96,6 +98,7 @@ const SendAlertPage = () => {
                     as="textarea"
                     name="message"
                     id="message"
+                    value={thisAlert.message}
                     onChange={onChange}
                     placeholder="Your message will be sent directly to the hospital you are
               associated with."
