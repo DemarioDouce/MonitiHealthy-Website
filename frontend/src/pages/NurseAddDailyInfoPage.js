@@ -12,6 +12,7 @@ import PatientBottomNavComponent from "../res/components/PatientBottomNavCompone
 import App from "../App";
 import axios from "axios";
 const NurseAddDailyInfoPage = (props) => {
+  const fullName = props.location.state.fullName;
   const screen = localStorage.getItem("screen");
   const [thisScreen, setThisScreen] = useState(screen);
   const [healthinfo, setHealthInfo] = useState({
@@ -20,7 +21,7 @@ const NurseAddDailyInfoPage = (props) => {
     bloodPressure: "",
     weight: "",
     temperature: "",
-    respiratoryRate: ""
+    respiratoryRate: "",
   });
   const readCookie = async () => {
     try {
@@ -43,28 +44,37 @@ const NurseAddDailyInfoPage = (props) => {
     setHealthInfo({ ...healthinfo, [e.target.name]: e.target.value });
   };
 
-  const apiUrl = "http://localhost:3000/api/patientrecs/"+props.location.state.detail;
+  const apiUrl =
+    "http://localhost:3000/api/patientrecs/" + props.location.state.detail;
 
   const healthInfoSubmit = (e) => {
     e.preventDefault();
-    
+
     const data = {
       pulseRate: healthinfo.pulseRate,
       bloodPressure: healthinfo.bloodPressure,
       weight: healthinfo.weight,
       temperature: healthinfo.temperature,
-      respiratoryRate: healthinfo.respiratoryRate
+      respiratoryRate: healthinfo.respiratoryRate,
     };
     axios
       .post(apiUrl, data)
       .then((result) => {
-        console.log(result.data)
+        console.log(result.data);
       })
       .catch((error) => {
         console.log(error);
       });
 
-    console.log(data)
+    console.log(data);
+    setHealthInfo({
+      pulseRate: "",
+      bloodPressure: "",
+      weight: "",
+      temperature: "",
+      respiratoryRate: "",
+    });
+    alert("Vital signs saved!");
   };
 
   useEffect(() => {
@@ -72,8 +82,8 @@ const NurseAddDailyInfoPage = (props) => {
   }, []);
   return (
     <>
-      <Container>
-          
+      {thisScreen !== "auth" ? (
+        <Container>
           <div className="text-center">
             <div
               style={{
@@ -87,6 +97,7 @@ const NurseAddDailyInfoPage = (props) => {
                 height: "50vh",
               }}
             >
+              <h3>Add Vital Signs For {fullName}</h3>
               {/* pulseRate */}
               <Form onSubmit={healthInfoSubmit}>
                 <Form.Group>
@@ -105,6 +116,7 @@ const NurseAddDailyInfoPage = (props) => {
                     placeholder="Pulse rate (per min) e.g 80"
                     type="number"
                     required
+                    value={healthinfo.pulseRate}
                     onChange={onChange}
                   />
                 </Form.Group>
@@ -125,6 +137,7 @@ const NurseAddDailyInfoPage = (props) => {
                     placeholder="Blood pressure (systolic/diastolic mm hg) e.g 120/80"
                     type="text"
                     required
+                    value={healthinfo.bloodPressure}
                     onChange={onChange}
                   />
                 </Form.Group>
@@ -145,6 +158,7 @@ const NurseAddDailyInfoPage = (props) => {
                     placeholder="Weight (lb) e.g 120.9"
                     type="number"
                     required
+                    value={healthinfo.weight}
                     onChange={onChange}
                   />
                 </Form.Group>
@@ -165,6 +179,7 @@ const NurseAddDailyInfoPage = (props) => {
                     placeholder="Temperature (C) e.g 23.5"
                     type="number"
                     required
+                    value={healthinfo.temperature}
                     onChange={onChange}
                   />
                 </Form.Group>
@@ -185,6 +200,7 @@ const NurseAddDailyInfoPage = (props) => {
                     placeholder="Respiratory rate (per min) e.g 16"
                     type="number"
                     required
+                    value={healthinfo.respiratoryRate}
                     onChange={onChange}
                   />
                 </Form.Group>
@@ -202,10 +218,7 @@ const NurseAddDailyInfoPage = (props) => {
                 >
                   SAVE
                 </Button>
-                <Link
-                  to="/nurse-dashboard"
-                  style={{ textDecoration: "none" }}
-                >
+                <Link to="/nurse-dashboard" style={{ textDecoration: "none" }}>
                   <Button
                     style={{
                       color: "#0d6efd",
@@ -225,10 +238,11 @@ const NurseAddDailyInfoPage = (props) => {
             </div>
           </div>
         </Container>
+      ) : (
+        <App />
+      )}
     </>
   );
 };
 
 export default NurseAddDailyInfoPage;
-
-
