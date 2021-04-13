@@ -62,7 +62,7 @@ function PatientMedHistoryNurse(props) {
             }}
           >
             <h3>{fullName}'s Medical History</h3>
-            <Link to="/nurse-dashboard" style={{ textDecoration: "none" }}>
+            <Link to="/all-patient" style={{ textDecoration: "none" }}>
               <p style={{ margin: "20px" }}>Go Back</p>
             </Link>
             <ListGroup>
