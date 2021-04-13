@@ -78,6 +78,8 @@ ReactDOM.render(
         component={SendMotivationalTipsPage}
         exact
       />
+      {/* Ai page*/}
+      <Route path="/ai" component={AiPage} exact />
     </Switch>
   </BrowserRouter>,
   document.getElementById("root")
