@@ -17,6 +17,7 @@ const NurseLoginPage = (props) => {
   const [userName, setuserName] = useState();
   const [password, setPassword] = useState();
   const apiUrl = "http://localhost:3000/signinnurse";
+  const [state, setState] = useState({ userName, screen });
 
   const auth = async (e) => {
     e.preventDefault();
@@ -27,9 +28,9 @@ const NurseLoginPage = (props) => {
       //make a get request to /authenticate end-point on the server
       const loginData = { auth: { userName, password } };
       //call api
-      const res = await axios.post(apiUrl, loginData);
-      console.log(res.data.auth);
-      console.log(res.data.screen);
+      const res = await axios.post(apiUrl, loginData).then((result) => {
+        props.history.push({ pathname: "/nurse-dashboard", state });
+      });
       //process the response
       if (res.data.screen !== undefined) {
         setScreen(res.data.screen);
@@ -40,137 +41,104 @@ const NurseLoginPage = (props) => {
       console.log(e);
     }
   };
-  //check if the user already logged-in
-  const readCookie = async () => {
-    try {
-      console.log("--- in readCookie function ---");
-
-      //
-      const res = await axios.get("/read_cookie");
-      //
-      if (res.data.screen !== undefined) {
-        setScreen(res.data.screen);
-        console.log(res.data.screen);
-      }
-    } catch (e) {
-      setScreen("auth");
-      console.log(e);
-    }
-  };
-  //runs the first time the view is rendered
-  //to check if user is signed in
-  useEffect(() => {
-    readCookie();
-  }, []); //only the first render
 
   //
   return (
     <>
-      {screen === "auth" ? (
-        <Container>
-          <div className="text-center">
-            <div
-              style={{
-                position: "absolute",
-                top: "0",
-                bottom: "0",
-                left: "0",
-                right: "0",
-                margin: "auto",
-                width: "50vw",
-                height: "50vh",
-              }}
-            >
-              <Form onSubmit={auth}>
-                <h1>Nurse Login</h1>
-                <Form.Group>
-                  <Form.Control
-                    style={{
-                      width: "50%",
-                      padding: "12px 20px",
-                      margin: "8px 0",
-                      display: "inline-block",
-                      border: "1px solid #ccc",
-                      borderRadius: "4px",
-                      boxSizing: "border-box",
-                    }}
-                    name="userName"
-                    id="userName"
-                    placeholder="Username"
-                    type="text"
-                    required
-                    onChange={(e) => setuserName(e.target.value)}
-                  />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Control
-                    style={{
-                      width: "50%",
-                      padding: "12px 20px",
-                      margin: "8px 0",
-                      display: "inline-block",
-                      border: "1px solid #ccc",
-                      borderRadius: "4px",
-                      boxSizing: "border-box",
-                    }}
-                    name="password"
-                    id="password"
-                    placeholder="Password"
-                    type="password"
-                    required
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </Form.Group>
+      <Container>
+        <div className="text-center">
+          <div
+            style={{
+              position: "absolute",
+              top: "0",
+              bottom: "0",
+              left: "0",
+              right: "0",
+              margin: "auto",
+              width: "50vw",
+              height: "50vh",
+            }}
+          >
+            <Form onSubmit={auth}>
+              <h1>Nurse Login</h1>
+              <Form.Group>
+                <Form.Control
+                  style={{
+                    width: "50%",
+                    padding: "12px 20px",
+                    margin: "8px 0",
+                    display: "inline-block",
+                    border: "1px solid #ccc",
+                    borderRadius: "4px",
+                    boxSizing: "border-box",
+                  }}
+                  name="userName"
+                  id="userName"
+                  placeholder="Username"
+                  type="text"
+                  required
+                  onChange={(e) => setuserName(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Control
+                  style={{
+                    width: "50%",
+                    padding: "12px 20px",
+                    margin: "8px 0",
+                    display: "inline-block",
+                    border: "1px solid #ccc",
+                    borderRadius: "4px",
+                    boxSizing: "border-box",
+                  }}
+                  name="password"
+                  id="password"
+                  placeholder="Password"
+                  type="password"
+                  required
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </Form.Group>
+              <Button
+                style={{
+                  color: "#fff",
+                  padding: "10px 30px",
+                  fontSize: "16px",
+                  margin: "10px 10px",
+                  backgroundColor: "#0d6efd",
+                  border: "2px solid #0d6efd",
+                }}
+                variant="contained"
+                type="submit"
+              >
+                LOGIN
+              </Button>
+              <Link to="/" style={{ textDecoration: "none" }}>
                 <Button
                   style={{
-                    color: "#fff",
+                    color: "#0d6efd",
                     padding: "10px 30px",
                     fontSize: "16px",
                     margin: "10px 10px",
-                    backgroundColor: "#0d6efd",
+                    backgroundColor: "#fff",
                     border: "2px solid #0d6efd",
                   }}
                   variant="contained"
-                  type="submit"
                 >
-                  LOGIN
+                  CANCEL
                 </Button>
-                <Link to="/" style={{ textDecoration: "none" }}>
-                  <Button
-                    style={{
-                      color: "#0d6efd",
-                      padding: "10px 30px",
-                      fontSize: "16px",
-                      margin: "10px 10px",
-                      backgroundColor: "#fff",
-                      border: "2px solid #0d6efd",
-                    }}
-                    variant="contained"
-                  >
-                    CANCEL
-                  </Button>
+              </Link>
+              <p>
+                Are you a patient?{" "}
+                <Link to="/patient-login" style={{ textDecoration: "none" }}>
+                  Login here.
                 </Link>
-                <p>
-                  Are you a patient?{" "}
-                  <Link to="/patient-login" style={{ textDecoration: "none" }}>
-                    Login here.
-                  </Link>
-                </p>
-              </Form>
-              <FooterComponent color="black" />
-            </div>
+              </p>
+            </Form>
+            <FooterComponent color="black" />
           </div>
-        </Container>
-      ) : (
-        //send the nurse username to nurse dashboard page
-        <NurseDashboardPage
-          //contains the nurse's user name
-          user={userName}
-          //contains the nurse's first name
-          nurseName={screen}
-          setScreen={setScreen}
-        />
-      )}
+        </div>
+      </Container>
     </>
   );
 };

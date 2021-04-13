@@ -11,7 +11,8 @@ import { Link } from "react-router-dom";
 import PatientBottomNavComponent from "../res/components/PatientBottomNavComponent";
 import App from "../App";
 import axios from "axios";
-const AddDailyInforPage = () => {
+const NurseAddDailyInfoPage = (props) => {
+  const fullName = props.location.state.fullName;
   const screen = localStorage.getItem("screen");
   const [thisScreen, setThisScreen] = useState(screen);
   const [healthinfo, setHealthInfo] = useState({
@@ -43,7 +44,8 @@ const AddDailyInforPage = () => {
     setHealthInfo({ ...healthinfo, [e.target.name]: e.target.value });
   };
 
-  const apiUrl = "http://localhost:3000/api/add-healthInfo";
+  const apiUrl =
+    "http://localhost:3000/api/patientrecs/" + props.location.state.detail;
 
   const healthInfoSubmit = (e) => {
     e.preventDefault();
@@ -72,7 +74,7 @@ const AddDailyInforPage = () => {
       temperature: "",
       respiratoryRate: "",
     });
-    alert("Daily information has been saved!");
+    alert("Vital signs saved!");
   };
 
   useEffect(() => {
@@ -82,7 +84,6 @@ const AddDailyInforPage = () => {
     <>
       {thisScreen !== "auth" ? (
         <Container>
-          <PatientBottomNavComponent index={2} setScreen={setThisScreen} />
           <div className="text-center">
             <div
               style={{
@@ -96,6 +97,7 @@ const AddDailyInforPage = () => {
                 height: "50vh",
               }}
             >
+              <h3>Add Vital Signs For {fullName}</h3>
               {/* pulseRate */}
               <Form onSubmit={healthInfoSubmit}>
                 <Form.Group>
@@ -216,10 +218,7 @@ const AddDailyInforPage = () => {
                 >
                   SAVE
                 </Button>
-                <Link
-                  to="/patient-dashboard"
-                  style={{ textDecoration: "none" }}
-                >
+                <Link to="/all-patient" style={{ textDecoration: "none" }}>
                   <Button
                     style={{
                       color: "#0d6efd",
@@ -246,4 +245,4 @@ const AddDailyInforPage = () => {
   );
 };
 
-export default AddDailyInforPage;
+export default NurseAddDailyInfoPage;

@@ -5,6 +5,8 @@ const jwt = require("jsonwebtoken");
 const config = require("../../config/config");
 const jwtExpirySeconds = 300;
 const jwtKey = config.secretKey;
+const HealthInfo = require("mongoose").model("HealthInfo");
+const { ObjectId } = require("mongodb");
 
 // Create a new user
 exports.create = function (req, res, next) {
@@ -145,4 +147,53 @@ exports.requiresLogin = function (req, res, next) {
   // user is authenticated
   //call next function in line
   next();
+};
+
+exports.list = function (req, res, next) {
+  // Use the 'User' instance's 'find' method to retrieve a new user document
+  Patient.find({}, function (err, patients) {
+      if (err) {
+          return next(err);
+      } else {
+          res.json(patients);
+      }
+  });
+};
+
+exports.patientByID = function (req, res, next, id) {
+  Patient.findById(id).populate('patient', 'firstName lastName fullName').exec((err, patient) => {if (err) return next(err);
+  if (!patient) return next(new Error('Failed to load course '
+          + id));
+      req.id = patient._id;
+      console.log('in patientById:', req.patient)
+      next();
+  });
+};
+
+exports.read = function (req, res) {
+  res.status(200).json(req.patient);
+};
+
+exports.healthinfobyPatient = async (req, res, id) => {
+
+  //let courseCode = req.body.auth.courseCode
+  //console.log(courseCode);
+  console.log(req.id);
+  let healthinfos = await HealthInfo.find({patient:ObjectId(req.id)});
+  console.log(healthinfos);
+  res.status(200).json(healthinfos)
+  //try{
+  //    var studArray = []
+  //    //student.forEach(element => {
+  //    //    studArray.push(element)
+  //    //});
+  //    for(let i = 0; i < student.length; i++){
+  //        studArray.push(student[i].student)
+  //    }
+  //    res.status(200).json(studArray)
+  //    
+  //}
+  //catch(e){
+  //    
+  //}
 };

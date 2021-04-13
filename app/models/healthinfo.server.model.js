@@ -7,6 +7,7 @@ var HealthInfoSchema = new Schema({
   weight: { type: Number, default: 0 },
   temperature: { type: Number, default: 0 },
   respiratoryRate: { type: Number, default: 0 },
+  date: { type: Date, default: Date.now },
   patient: [{ type: Schema.ObjectId, ref: "Patient" }],
 });
 
