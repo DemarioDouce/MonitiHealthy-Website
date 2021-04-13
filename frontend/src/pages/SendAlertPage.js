@@ -17,7 +17,7 @@ const SendAlertPage = () => {
   const [thisScreen, setThisScreen] = useState(screen);
   const [alert, setAlert] = useState({
     _id: "",
-    message: ""
+    message: "",
   });
   const readCookie = async () => {
     try {
@@ -44,26 +44,24 @@ const SendAlertPage = () => {
 
   const alertSubmit = (e) => {
     e.preventDefault();
-    
+
     const data = {
       message: alert.message,
     };
     axios
       .post(apiUrl, data)
-      .then((result) => {
-        
-      })
+      .then((result) => {})
       .catch((error) => {
         console.log(error);
       });
 
-    console.log(data)
+    console.log(data);
   };
 
   useEffect(() => {
     readCookie();
   }, []);
-  
+
   return (
     <>
       {thisScreen !== "auth" ? (
