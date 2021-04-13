@@ -218,7 +218,7 @@ const NurseAddDailyInfoPage = (props) => {
                 >
                   SAVE
                 </Button>
-                <Link to="/nurse-dashboard" style={{ textDecoration: "none" }}>
+                <Link to="/all-patient" style={{ textDecoration: "none" }}>
                   <Button
                     style={{
                       color: "#0d6efd",
