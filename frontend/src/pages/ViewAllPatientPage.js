@@ -44,6 +44,13 @@ function ViewAllPatientPage(props) {
       state: { detail: name, fullName: fullName },
     });
   }
+
+  function sendMotivationOnClick(name, fullName) {
+    props.history.push({
+      pathname: "/send-motivational-tips",
+      state: { detail: name, fullName },
+    });
+  }
   useEffect(() => {
     readCookie();
     const getPatients = async () => {
@@ -51,14 +58,6 @@ function ViewAllPatientPage(props) {
       await axios
         .get(apiUrl)
         .then((result) => {
-          //console.log('result.data:',result.data)
-          //check if the user has logged in
-          //if(result.data.screen !== 'auth')
-          //{
-
-          //console.log('data in if:', result.data )
-          //setData(result.data);
-          //setRowData(result.data);
           console.log("--- in getAlertAxios function ---");
           setPatients(result.data);
           //console.log(result.data)
@@ -149,6 +148,9 @@ function ViewAllPatientPage(props) {
                         border: "2px solid #A9A9A9",
                       }}
                       variant="contained"
+                      onClick={() => {
+                        sendMotivationOnClick(patient._id, patient.fullName);
+                      }}
                     >
                       Send Motivational Tips
                     </Button>
