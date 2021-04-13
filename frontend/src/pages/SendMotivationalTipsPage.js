@@ -8,6 +8,70 @@ import { Button } from "@material-ui/core";
 //Load react-router-dom package
 import { Link } from "react-router-dom";
 
+export default function TipsByNurse() {
+  // const classes = useStyles();
+   const apiUrl = "http://localhost:3000/api/signinnurse";
+   const apiUrlSearch = "http://localhost:3000/api/tips-by-nurses";
+   const [userName, setUserName] = useState('');
+   //const [data, setData] = useState([]);
+  // const [dataStudent, setDataStudent] = useState([]);
+   const [patients, setPatients] = useState([]);
+   let patientSet = []
+   const searchData = { auth: { userName } }
+ 
+   //
+ 
+   useEffect(() => {
+     const getPatients = async () => {
+       await axios.get(apiUrl)
+         .then(result => {
+           //console.log('result.data:',result.data)
+           //check if the user has logged in
+           //if(result.data.screen !== 'auth')
+           //{
+             
+             //console.log('data in if:', result.data )
+             setData(result.data);
+             console.log(userName)
+             
+             
+           //}
+         }).catch((error) => {
+           console.log('error in fetchData:', error)
+         });
+         //rowsArray(data);
+     };
+     //
+       getCourses();
+       
+   }, []);
+ 
+   const onChange = (e) => {
+     e.persist();
+     setCourseCode(e.target.value)
+ 
+   }
+ 
+   const getPatients = async () => {
+     await axios.post(apiUrlSearch,searchData)
+       .then(result => {
+         //console.log('result.data:',result.data)
+         //check if the user has logged in
+         //if(result.data.screen !== 'auth')
+         //{
+           
+           //console.log('data in if:', result.data )
+           //setData(result.data);
+           setDataStudent(result.data)
+           console.log(result.data)
+           
+         //}
+       }).catch((error) => {
+         console.log('error in fetchData:', error)
+       });
+       //rowsArray(data);
+   };
+
 const SendMotivationalTipsPage = (props) => {
   const fullName = props.location.state.fullName;
   return (
@@ -82,5 +146,6 @@ const SendMotivationalTipsPage = (props) => {
     </Container>
   );
 };
+}
 
 export default SendMotivationalTipsPage;
