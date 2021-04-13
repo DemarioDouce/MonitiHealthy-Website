@@ -11,7 +11,7 @@ import { Hidden } from "@material-ui/core";
 
 function ViewAllPatientPage(props) {
   const scsreen = localStorage.getItem("screen");
-  const [thisScreen, setThisScreen] = useState(screen);
+  const [thisScreen, setThisScreen] = useState("screen");
   const [patients, setPatients] = useState([]);
   const apiUrl = "http://localhost:3000/list-patients";
 

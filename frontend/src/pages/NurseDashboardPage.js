@@ -17,7 +17,7 @@ const NurseDashboardPage = (props) => {
   const deleteCookie = async () => {
     try {
       await axios.get("/signoutnurse");
-      setScreen("auth");
+      // setScreen("auth");
     } catch (e) {
       console.log(e);
     }
