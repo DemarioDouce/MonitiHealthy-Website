@@ -23,6 +23,7 @@ import WatchVideoPage from "./pages/WatchVideoPage";
 import PatientMedHistoryNurse from "./pages/PatientMedHistoryNurse";
 import NurseAddDailyInfoPage from "./pages/NurseAddDailyInfoPage";
 import PatientMotivationalTipsPage from "./pages/PatientMotivationalTipsPage";
+import SendMotivationalTipsPage from "./pages/SendMotivationalTipsPage";
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
@@ -69,6 +70,12 @@ ReactDOM.render(
       <Route
         path="/motivational-tips"
         component={PatientMotivationalTipsPage}
+        exact
+      />
+      {/* Nurse to send motivational tips to patient page  */}
+      <Route
+        path="/send-motivational-tips"
+        component={SendMotivationalTipsPage}
         exact
       />
     </Switch>
