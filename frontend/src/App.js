@@ -74,7 +74,7 @@ const App = () => {
             <Link to="/ai" style={{ textDecoration: "none", color: "white" }}>
               <p>
                 Click here to check your blood pressure for free.{" "}
-                <Badge style={{ backgroundColor: "blue" }} variant="primary">
+                <Badge style={{ backgroundColor: "#0d6efd" }} variant="primary">
                   New
                 </Badge>
               </p>
