@@ -30,27 +30,29 @@ function AlertHistoryPage() {
     readCookie();
     const getAlerts = async () => {
       console.log("--- in getAlert function ---");
-      await axios.get(apiUrl)
-        .then(result => {
+      await axios
+        .get(apiUrl)
+        .then((result) => {
           //console.log('result.data:',result.data)
           //check if the user has logged in
           //if(result.data.screen !== 'auth')
           //{
-            
-            //console.log('data in if:', result.data )
-            //setData(result.data);
-            //setRowData(result.data);
-            console.log("--- in getAlertAxios function ---");
-            setAlerts(result.data)
-            //console.log(result.data)
-            
+
+          //console.log('data in if:', result.data )
+          //setData(result.data);
+          //setRowData(result.data);
+          console.log("--- in getAlertAxios function ---");
+          setAlerts(result.data);
+          //console.log(result.data)
+
           //}
-        }).catch((error) => {
-          console.log('error in fetchData:', error)
+        })
+        .catch((error) => {
+          console.log("error in fetchData:", error);
         });
-        //rowsArray(data);
-      };  
-      getAlerts();
+      //rowsArray(data);
+    };
+    getAlerts();
   }, []);
   return (
     <>
@@ -70,23 +72,29 @@ function AlertHistoryPage() {
                 height: "50vh",
               }}
             >
-              <ListGroup>
-                {alerts.map((alert) => (<ListGroup.Item
-                  style={{
-                    width: "100%",
-                    padding: "12px 20px",
-                    margin: "8px 0",
-                    display: "inline-block",
-                    border: "1px solid #ccc",
-                    borderRadius: "4px",
-                    boxSizing: "border-box",
-                  }}
-                >
-                  Message: {alert.message}<br></br>
-                  Sent: {alert.date}
-                </ListGroup.Item>))}
-                
-              </ListGroup>
+              {alerts.length !== 0 ? (
+                <ListGroup>
+                  {alerts.map((alert) => (
+                    <ListGroup.Item
+                      style={{
+                        width: "100%",
+                        padding: "12px 20px",
+                        margin: "8px 0",
+                        display: "inline-block",
+                        border: "1px solid #ccc",
+                        borderRadius: "4px",
+                        boxSizing: "border-box",
+                      }}
+                    >
+                      Message: {alert.message}
+                      <br></br>
+                      Sent: {alert.date}
+                    </ListGroup.Item>
+                  ))}
+                </ListGroup>
+              ) : (
+                <h3>Alert history unavailable</h3>
+              )}
             </div>
           </div>
         </Container>

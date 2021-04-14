@@ -60,23 +60,27 @@ const PatientMotivationalTipsPage = () => {
                 height: "50vh",
               }}
             >
-              <ListGroup>
-                {tips.map((tip) => (
-                  <ListGroup.Item
-                    style={{
-                      width: "100%",
-                      padding: "12px 20px",
-                      margin: "8px 0",
-                      display: "inline-block",
-                      border: "1px solid #ccc",
-                      borderRadius: "4px",
-                      boxSizing: "border-box",
-                    }}
-                  >
-                    Message: {tip.message}
-                  </ListGroup.Item>
-                ))}
-              </ListGroup>
+              {tips.length !== 0 ? (
+                <ListGroup>
+                  {tips.map((tip) => (
+                    <ListGroup.Item
+                      style={{
+                        width: "100%",
+                        padding: "12px 20px",
+                        margin: "8px 0",
+                        display: "inline-block",
+                        border: "1px solid #ccc",
+                        borderRadius: "4px",
+                        boxSizing: "border-box",
+                      }}
+                    >
+                      Message: {tip.message}
+                    </ListGroup.Item>
+                  ))}
+                </ListGroup>
+              ) : (
+                <h3>No tips available yet</h3>
+              )}
             </div>
           </div>
         </Container>

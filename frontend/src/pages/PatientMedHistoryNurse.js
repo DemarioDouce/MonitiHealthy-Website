@@ -24,14 +24,6 @@ function PatientMedHistoryNurse(props) {
       await axios
         .get(apiUrl)
         .then((result) => {
-          //console.log('result.data:',result.data)
-          //check if the user has logged in
-          //if(result.data.screen !== 'auth')
-          //{
-
-          //console.log('data in if:', result.data )
-          //setData(result.data);
-          //setRowData(result.data);
           console.log("--- in getPatientHistoryAxios function ---");
           setHealthHistory(result.data);
           console.log(result.data);
@@ -65,34 +57,38 @@ function PatientMedHistoryNurse(props) {
             <Link to="/all-patient" style={{ textDecoration: "none" }}>
               <p style={{ margin: "20px" }}>Go Back</p>
             </Link>
-            <ListGroup>
-              {healthHistory.map((healthinfo) => (
-                <ListGroup.Item
-                  style={{
-                    width: "100%",
-                    padding: "12px 20px",
-                    margin: "8px 0",
-                    display: "inline-block",
-                    border: "1px solid #ccc",
-                    borderRadius: "4px",
-                    boxSizing: "border-box",
-                  }}
-                >
-                  Date: {healthinfo.date}
-                  <br></br>
-                  Pulse Rate: {healthinfo.pulseRate}
-                  <br></br>
-                  Weight: {healthinfo.weight}
-                  <br></br>
-                  Temperature: {healthinfo.temperature}
-                  <br></br>
-                  Blood Pressure: {healthinfo.bloodPressure}
-                  <br></br>
-                  Respiratory Rate: {healthinfo.respiratoryRate}
-                  <br></br>
-                </ListGroup.Item>
-              ))}
-            </ListGroup>
+            {healthHistory.length !== 0 ? (
+              <ListGroup>
+                {healthHistory.map((healthinfo) => (
+                  <ListGroup.Item
+                    style={{
+                      width: "100%",
+                      padding: "12px 20px",
+                      margin: "8px 0",
+                      display: "inline-block",
+                      border: "1px solid #ccc",
+                      borderRadius: "4px",
+                      boxSizing: "border-box",
+                    }}
+                  >
+                    Date: {healthinfo.date}
+                    <br></br>
+                    Pulse Rate: {healthinfo.pulseRate}
+                    <br></br>
+                    Weight: {healthinfo.weight}
+                    <br></br>
+                    Temperature: {healthinfo.temperature}
+                    <br></br>
+                    Blood Pressure: {healthinfo.bloodPressure}
+                    <br></br>
+                    Respiratory Rate: {healthinfo.respiratoryRate}
+                    <br></br>
+                  </ListGroup.Item>
+                ))}
+              </ListGroup>
+            ) : (
+              <h3>Medical History Unavailable</h3>
+            )}
             <FooterComponent color="black" />
           </div>
         </div>
