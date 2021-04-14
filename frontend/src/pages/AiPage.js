@@ -84,6 +84,9 @@ const AiPage = () => {
               </Button>
             </Form>
             <p>{prediction}</p>
+            <Link to="/" style={{ textDecoration: "none" }}>
+              <p>Go Back</p>
+            </Link>
             <FooterComponent color="black" />
           </div>
         </div>

@@ -7,6 +7,8 @@ import heroBackground from "./res/img/HeroBackground.jpg";
 import { Button } from "@material-ui/core";
 //Load react-router-dom package
 import { Link } from "react-router-dom";
+//Load react-bootstrap package
+import { Badge } from "react-bootstrap";
 
 const App = () => {
   return (
@@ -68,6 +70,16 @@ const App = () => {
               SIGNUP
             </Button>
           </Link>
+          <div>
+            <Link to="/ai" style={{ textDecoration: "none", color: "white" }}>
+              <p>
+                Click here to check your blood pressure for free.{" "}
+                <Badge style={{ backgroundColor: "blue" }} variant="primary">
+                  New
+                </Badge>
+              </p>
+            </Link>
+          </div>
         </div>
       </div>
       <FooterComponent color="white" />
