@@ -24,6 +24,7 @@ import PatientMedHistoryNurse from "./pages/PatientMedHistoryNurse";
 import NurseAddDailyInfoPage from "./pages/NurseAddDailyInfoPage";
 import PatientMotivationalTipsPage from "./pages/PatientMotivationalTipsPage";
 import SendMotivationalTipsPage from "./pages/SendMotivationalTipsPage";
+import AiPage from "./pages/AiPage";
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
