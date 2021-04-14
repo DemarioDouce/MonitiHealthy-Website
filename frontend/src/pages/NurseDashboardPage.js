@@ -46,7 +46,7 @@ const NurseDashboardPage = (props) => {
   const deleteCookie = async () => {
     try {
       await axios.get("/signoutnurse");
-      setScreen("auth");
+      //setScreen("auth");
       localStorage.setItem("screen", "auth");
     } catch (e) {
       console.log(e);
