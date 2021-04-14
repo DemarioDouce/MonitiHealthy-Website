@@ -7,18 +7,17 @@ const jwtKey = config.secretKey;
 const { ObjectId } = require("mongodb");
 const Patient = require("mongoose").model("Patient");
 const HealthInfo = require("mongoose").model("HealthInfo");
-
+const MotivationalTips = require("mongoose").model("MotivationalTips");
 
 function getErrorMessage(err) {
   if (err.errors) {
-      for (let errName in err.errors) {
-          if (err.errors[errName].message) return err.errors[errName].
-              message;
-      }
+    for (let errName in err.errors) {
+      if (err.errors[errName].message) return err.errors[errName].message;
+    }
   } else {
-      return 'Unknown server error';
+    return "Unknown server error";
   }
-};
+}
 
 //
 exports.create = function (req, res, next) {
@@ -159,13 +158,15 @@ exports.requiresLogin = function (req, res, next) {
 };
 
 exports.patientByID = function (req, res, next, id) {
-  Patient.findById(id).populate('patient', 'firstName lastName fullName').exec((err, patient) => {if (err) return next(err);
-  if (!patient) return next(new Error('Failed to load course '
-          + id));
+  Patient.findById(id)
+    .populate("patient", "firstName lastName fullName")
+    .exec((err, patient) => {
+      if (err) return next(err);
+      if (!patient) return next(new Error("Failed to load course " + id));
       req.id = patient._id;
-      console.log('in patientById:', req.id)
+      console.log("in patientById:", req.id);
       next();
-  });
+    });
 };
 
 exports.addPatientHealthInfo = function (req, res) {
@@ -176,60 +177,65 @@ exports.addPatientHealthInfo = function (req, res) {
   healthInfo.temperature = req.body.temperature;
   healthInfo.respiratoryRate = req.body.respiratoryRate;
 
-  //var patient = req.patientUsername
-  //console.log(req.body)
-  //
-  //
-  //let patient = await Patient.findById({patient:ObjectId(req.id)});
-  Patient.findById({_id:ObjectId(req.id)}, (err, patient) => {
+  Patient.findById({ _id: ObjectId(req.id) }, (err, patient) => {
+    if (err) {
+      return getErrorMessage(err);
+    }
+    //
+    req.id = patient._id;
+  }).then(function () {
+    healthInfo.patient = req.id;
+    console.log("req.patient._id", req.id);
 
-      if (err) { return getErrorMessage(err); }
-      //
-      req.id = patient._id;
-      //console.log('patient._id',req.id);
-      //console.log(patient)
+    healthInfo.save((err) => {
+      if (err) {
+        console.log("error", getErrorMessage(err));
 
-
-  }).then( function () 
-  {
-      healthInfo.patient = req.id
-      console.log('req.patient._id',req.id);
-
-      healthInfo.save((err) => {
-          if (err) {
-              console.log('error', getErrorMessage(err))
-
-              return res.status(400).send({
-                  message: getErrorMessage(err)
-              });
-          } else {
-              res.status(200).json(healthInfo);
-          }
-      });
-  
+        return res.status(400).send({
+          message: getErrorMessage(err),
+        });
+      } else {
+        res.status(200).json(healthInfo);
+      }
+    });
   });
 };
 
 exports.healthinfobyPatient = async (req, res, id) => {
-
   //let courseCode = req.body.auth.courseCode
   //console.log(courseCode);
   console.log(req.id);
-  let healthinfos = await HealthInfo.find({patient:ObjectId(req.id)});
+  let healthinfos = await HealthInfo.find({ patient: ObjectId(req.id) });
   console.log(healthinfos);
-  res.status(200).json(healthinfos)
-  //try{
-  //    var studArray = []
-  //    //student.forEach(element => {
-  //    //    studArray.push(element)
-  //    //});
-  //    for(let i = 0; i < student.length; i++){
-  //        studArray.push(student[i].student)
-  //    }
-  //    res.status(200).json(studArray)
-  //    
-  //}
-  //catch(e){
-  //    
-  //}
+  res.status(200).json(healthinfos);
+};
+
+exports.sendMotivationalTips = function (req, res) {
+  const motivationalTips = new MotivationalTips();
+  motivationalTips.message = req.body.message;
+  console.log(req.body.message);
+
+  Patient.findById({ _id: ObjectId(req.id) }, (err, patient) => {
+    if (err) {
+      return getErrorMessage(err);
+    }
+    //
+    req.id = patient._id;
+  }).then(function () {
+    motivationalTips.patient = req.id;
+    console.log("req.patient._id", req.id);
+
+    motivationalTips.save((err) => {
+      if (err) {
+        console.log("error", getErrorMessage(err));
+
+        return res.status(400).send({
+          message: getErrorMessage(err),
+        });
+      } else {
+        console.log("Motivational Tip successfully sent");
+        res.status(200).json(motivationalTips);
+      }
+    });
+  });
 };
