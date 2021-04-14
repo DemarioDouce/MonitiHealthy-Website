@@ -24,6 +24,8 @@ module.exports = function () {
   require("../app/models/healthinfo.server.model");
   // Load the 'Alert' model
   require("../app/models/alert.server.model");
+  // Load the 'motivational tips' model
+  require("../app/models/motivationaltips.server.model");
   // Return the Mongoose connection instance
   return db;
 };
